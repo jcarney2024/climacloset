@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %} Log In {% endblock %}
+
+
+{% block body %}
+<div class="container mt-5" height="100%">
+  <h1 class="text-center mb-4">Welcome Back</h1>
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <div class="notification is-danger">
+    {{ messages[0] }}
+  </div>
+  {% endif %}
+  {% endwith %}
+  <form action="/login" method="post" class="mx-auto" style="max-width: 400px">
+    <!-- Username Field -->
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="text" name="email" id="email" class="form-control" placeholder="Enter your email" autocomplete="off"
+        autofocus required />
+    </div>
+    <!-- Password Field -->
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password"
+        required />
+    </div>
+    <!-- Submit Button -->
+    <div class="d-grid">
+      <button type="submit" class="btn btn-primaryblue btn-block">Log In</button>
+    </div>
+  </form>
+  <p class="text-center mt-3">
+    Don't have an account? <a href="/signup">Register here</a>
+  </p>
+</div>
+{% endblock %}

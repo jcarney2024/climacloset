@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %} Home {% endblock %}
+{% set active_page = "index" %}
+
+{% block body %}
+<div class="px-4 py-5 my-5 text-center">
+  <h1 class="display-5 fw-bold text-body-emphasis">Welcome to ClimaCloset</h1>
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4">Select a location to check the weather:</p>
+
+    <!-- Dropdown for location selection -->
+    <select id="location-select" class="form-select mb-3">
+      <option value="41.3081,-72.9282">New Haven, CT</option>
+      <option value="40.7128,-74.0060">New York, NY</option>
+      <option value="34.0522,-118.2437">Los Angeles, CA</option>
+      <option value="51.5074,-0.1278">London, UK</option>
+      <!-- Add more locations as needed -->
+    </select>
+
+    <img id="weather-image" src="" alt="Weather Image" defer width="200" height="200" />
+    <div id="weather-info" defer></div>
+    <div id="weather-info" defer class="mt-3"></div>
+
+    <hr class="my-4">
+
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+      <hr>
+      <button type="button" class="btn btn-primaryblue btn-lg px-4 gap-3">
+        Get Your Outfit Suggestion!
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="/static/weather.js" defer></script>
+{% endblock %}

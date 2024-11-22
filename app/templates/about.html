@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock %}
+{% set active_page = "about" %}
+
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="../static/ClimaCloset.svg" type="image/svg+xml" />
+
+  <title>About</title>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>About</h1>
+      <hr class="divider" />
+    </header>
+
+    <div class="content">
+      <p>It's raining, let's add some drip to your fit!</p>
+      <p>
+        Designed by three Yale students, ClimaCloset is an web app that gives you
+        clothing recommendations based on the weather.
+      </p>
+    </div>
+
+    <p><strong>Contact Us:</strong></p>
+    <ul style="list-style: none; padding: 0; margin: 0">
+      <li><a href="mailto:j.carney@yale.edu">Jack Carney</a></li>
+      <li><a href="mailto:kelly.x.wu@yale.edu">Kelly Wu</a></li>
+      <li><a href="mailto:mandy.chen@yale.edu">Mandy Chen</a></li>
+    </ul>
+  </div>
+</body>
+
+</html>
+{% endblock %}

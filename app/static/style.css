@@ -1,0 +1,14 @@
+.btn-primaryblue {
+  background-color: #86a3bf;
+  /* Light Blue */
+  color: white;
+  /* Text Color */
+  border: none;
+}
+
+.btn-primaryblue:hover {
+  background-color: #151f55;
+  /* Dark Blue */
+  color: white;
+  /* Text color stays white */
+}

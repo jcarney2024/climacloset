@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %} Register {% endblock %}
+
+{% block body%}
+<div class="container mt-5">
+  <h1 class="text-center mb-4">Create an Account</h1>
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <div class="notification is-danger">
+    {{ messages[0] }}. Go to <a href="{{ url_for('auth.login') }}">login page</a>.
+  </div>
+  {% endif %}
+  {% endwith %}
+  <form action="/signup" method="POST" class="mx-auto" style="max-width: 400px">
+    <!-- Name Field -->
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" name="name" id="name" class="form-control" placeholder="Enter your name" autocomplete="off"
+        required />
+      <!-- Email Field -->
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" name="email" id="email" class="form-control" placeholder="Enter your email"
+          autocomplete="off" required />
+      </div>
+      <!-- Password Field -->
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password"
+          required />
+      </div>
+      <!-- Password Confirmation Field -->
+      <div class="mb-3">
+        <label for="confirmation" class="form-label">Confirm Password</label>
+        <input type="password" name="confirmation" id="confirmation" class="form-control"
+          placeholder="Re-enter your password" required />
+      </div>
+      <!-- Submit Button -->
+      <div class="d-grid">
+        <button type="submit" class="btn btn-primaryblue">Register</button>
+      </div>
+  </form>
+  <p class="text-center mt-3">
+    Already have an account? <a href="/login">Log In</a>
+  </p>
+</div>
+{% endblock %}
