@@ -1,5 +1,7 @@
 function sendGetRequest() {
     const selectedLocation = this.value;
     const [latitude, longitude] = selectedLocation.split(',');
-    window.location.href = `?latitude=${latitude}&longitude=${longitude}`;
+    const encodedLatitude = encodeURIComponent(latitude);
+    const encodedLongitude = encodeURIComponent(longitude);
+    window.location.href = `?latitude=${encodedLatitude}&longitude=${encodedLongitude}`;
 }
