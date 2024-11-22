@@ -1,14 +1,45 @@
-from flask import Blueprint, render_template
+from email.mime import image
+from flask import Blueprint, render_template, request, jsonify
 from flask_login import login_required, current_user
 from . import db
+import requests
+from dotenv import load_dotenv
+import os
+import random
 import google.generativeai as genai
-from flask import request, jsonify
+
+load_dotenv()
 
 main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
-    return render_template('index.html')
+    latitude = request.args.get('latitude', '41.3081')
+    longitude = request.args.get('longitude', '-72.9282')
+    selected_location = f"{latitude},{longitude}" if latitude and longitude else None
+
+    api_url = f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&current_weather=true&temperature_unit=fahrenheit"
+
+    try:
+        response = requests.get(api_url)
+        response.raise_for_status()
+        weather_data = response.json()
+        temp = weather_data['current_weather']['temperature']
+    except requests.RequestException as e:
+        temp = None
+        
+    # List of image paths
+    images = [
+    "../static/rain.svg",
+    "../static/sun_cloud.svg",
+    "../static/windy.svg",
+    ]
+
+    # Choose a random image from the list
+    random_index = random.randint(0, len(images) - 1)
+    random_image = images[random_index]
+
+    return render_template('index.html', temp=temp, selected_location=selected_location, image=random_image)
 
 @main.route('/profile')
 @login_required
@@ -23,26 +54,13 @@ def about():
 def explore():
     return render_template('explore.html')
 
-@main.route('/chat')
+@main.route('/chat', methods=['POST'])
 def chat():
-    def get_weather():
-        latitude = request.args.get('latitude')
-        longitude = request.args.get('longitude')
-
-        if not latitude or not longitude:
-            return jsonify({'error': 'Missing latitude or longitude'}), 400
-
-        api_url = f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&current_weather=true&temperature_unit=fahrenheit"
-
-        try:
-            response = request.get(api_url)
-            response.raise_for_status()
-            weather_data = response.json()
-            return jsonify(weather_data['current_weather'])
-        except request.RequestException as e:
-            return jsonify({'error': 'Failed to fetch weather data'}), 500
-
-    genai.configure(api_key="AIzaSyDa7FYJhcamSRfO1udd9-p5BDe0rwdhqGQ")
+    temp = request.form.get('temp')
+    genai.configure(api_key=os.environ["API_KEY"])
     model = genai.GenerativeModel("gemini-1.5-flash")
-    response = model.generate_content("Explain how AI works")
-    return response.text
+    response = model.generate_content(f"Generate clothing suggestions based on the temperature: {temp}. Only give one sentence response with what to wear in simple terms.")
+    
+    suggestion = response.text if response.text else "No suggestion available."
+    
+    return jsonify({'suggestion': suggestion})

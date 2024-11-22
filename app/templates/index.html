@@ -5,32 +5,62 @@
 {% block body %}
 <div class="px-4 py-5 my-5 text-center">
   <h1 class="display-5 fw-bold text-body-emphasis">Welcome to ClimaCloset</h1>
-  <div class="col-lg-6 mx-auto">
+  <div class="col-md-4 mx-auto">
     <p class="lead mb-4">Select a location to check the weather:</p>
 
     <!-- Dropdown for location selection -->
-    <select id="location-select" class="form-select mb-3">
-      <option value="41.3081,-72.9282">New Haven, CT</option>
-      <option value="40.7128,-74.0060">New York, NY</option>
-      <option value="34.0522,-118.2437">Los Angeles, CA</option>
-      <option value="51.5074,-0.1278">London, UK</option>
+    <select id="location-select" class="form-select mb-3 btn-sm" onchange="sendGetRequest.call(this)">
+      <option value="41.3081,-72.9282" {% if selected_location=='41.3081,-72.9282' %} selected {% endif %}>New Haven,
+        CT</option>
+      <option value="40.7128,-74.0060" {% if selected_location=='40.7128,-74.0060' %} selected {% endif %}>New York, NY
+      </option>
+      <option value="34.0522,-118.2437" {% if selected_location=='34.0522,-118.2437' %} selected {% endif %}>Los
+        Angeles, CA</option>
+      <option value="51.5074,-0.1278" {% if selected_location=='51.5074,-0.1278' %} selected {% endif %}>London, UK
+      </option>
       <!-- Add more locations as needed -->
     </select>
 
-    <img id="weather-image" src="" alt="Weather Image" defer width="200" height="200" />
-    <div id="weather-info" defer></div>
+    <img id="weather-image" src="{{ image }}" alt="Weather Image" defer width="200" height="200" />
+    <div id="weather-info" defer>The current temperature is {{ temp }}°F.</div>
     <div id="weather-info" defer class="mt-3"></div>
 
     <hr class="my-4">
 
-    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+    <div id="chat" class="d-grid gap-2 d-sm-flex justify-content-sm-center">
       <hr>
-      <button type="button" class="btn btn-primaryblue btn-lg px-4 gap-3">
-        Get Your Outfit Suggestion!
-      </button>
+      <form id="chat-form" action="/chat" method="POST">
+        <input type="hidden" id="temp" name="temp" value="{{temp}}">
+        <button type="submit" class="btn btn-primaryblue btn-lg px-4 gap-3">
+          Get Your Outfit Suggestion!
+        </button>
+      </form>
+    </div>
+
+    <div id="suggestion-card" class="card mt-4" style="display: none;">
+      <div class="card-body">
+        <h5 class="card-title">Outfit Suggestion</h5>
+        <p class="card-text" id="suggestion-text"></p>
+      </div>
     </div>
   </div>
 </div>
 
 <script src="/static/weather.js" defer></script>
+<script>
+  document.getElementById('chat-form').addEventListener('submit', function (event) {
+    event.preventDefault();
+    const formData = new FormData(this);
+    fetch('/chat', {
+      method: 'POST',
+      body: formData
+    })
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('suggestion-text').innerText = data.suggestion;
+        document.getElementById('suggestion-card').style.display = 'block';
+      })
+      .catch(error => console.error('Error:', error));
+  });
+</script>
 {% endblock %}

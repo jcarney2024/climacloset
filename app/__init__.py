@@ -2,12 +2,15 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
+from dotenv import load_dotenv
+import os
 
 # init SQLAlchemy so we can use it later in our models
 db = SQLAlchemy()
 migrate = Migrate()
 
 def create_app():
+    load_dotenv()
     app = Flask(__name__)
 
     app.config['SECRET_KEY'] = 'UnjxLHuQHLNSfmtwXRGTZvC0eqQm6v6w'
