@@ -10,6 +10,9 @@ import google.generativeai as genai
 
 load_dotenv()
 
+def page_not_found(e):
+    return render_template('404.html', e=e), 404
+
 main = Blueprint('main', __name__)
 
 @main.route('/')

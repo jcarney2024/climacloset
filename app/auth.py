@@ -25,18 +25,6 @@ def login_post():
         flash('Please check your login details and try again.')
         return redirect(url_for('auth.login')) # if the user doesn't exist or password is wrong, reload the page
 
-    # con = sqlite3.connect("./app/climacloset.db")
-    # db = con.cursor()
-
-    # user = db.execute('''SELECT * FROM User WHERE email = ?''', (email,)).fetchone()
-    
-    # hash = db.execute('''SELECT password FROM User WHERE email = ?''', (email,)).fetchone()
-
-    # if user is None or not check_password_hash(hash[0], password):
-    #     flash('Please check your login details and try again.')
-    #     return redirect(url_for('auth.login')) 
-    # name = db.execute('''SELECT name FROM User WHERE email = ?''', (email,)).fetchone()[0]
-
     login_user(user, remember=remember)
     return redirect(url_for('main.profile'))
 
