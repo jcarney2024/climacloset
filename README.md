@@ -13,11 +13,7 @@
 2. **Wait for the Codespace to initialize**:
    - This will set up the development container automatically using the configurations in `.devcontainer/devcontainer.json`.
 
-3. **Set the `API_KEY` environment variable**:
-   - In your Codespace, go to **Settings** > **Codespaces Secrets**.
-   - Add a new secret named `API_KEY` with your API key.
-
-4. **Run the Flask app**:
+3. **Run the Flask app**:
    - Open a terminal in the Codespace.
    - Run the application:
 
@@ -25,11 +21,11 @@
      flask run --host=0.0.0.0
      ```
 
-5. **Access the app**:
+4. **Access the app**:
    - Forward port **5000** when prompted.
    - Open the forwarded port in your browser to view the app.
   
-6. **Choose a feature to work on**:
+5. **Choose a feature to work on**:
    - Choose a feature from the projects tab on GitHub
    - Make sure to move it to a different category so no one else works on it!
 
