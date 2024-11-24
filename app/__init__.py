@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from dotenv import load_dotenv
-import os
+from datetime import timedelta
 
 # init SQLAlchemy so we can use it later in our models
 db = SQLAlchemy()
@@ -12,6 +12,9 @@ migrate = Migrate()
 def create_app():
     load_dotenv()
     app = Flask(__name__)
+    
+    app.config['REMEMBER_COOKIE_DURATION'] = timedelta(minutes=30)  # 30 days
+
 
     app.config['SECRET_KEY'] = 'UnjxLHuQHLNSfmtwXRGTZvC0eqQm6v6w'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///climacloset.db'
@@ -35,8 +38,11 @@ def create_app():
     app.register_blueprint(auth_blueprint)
 
     # blueprint for non-auth parts of app
-    from .main import main as main_blueprint
+    from .main import main as main_blueprint, page_not_found
     app.register_blueprint(main_blueprint)
+
+    # Register error handler
+    app.register_error_handler(404, page_not_found)
     
     with app.app_context():
         db.create_all()

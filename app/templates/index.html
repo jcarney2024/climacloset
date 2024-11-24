@@ -50,6 +50,10 @@
 <script>
   document.getElementById('chat-form').addEventListener('submit', function (event) {
     event.preventDefault();
+    const button = this.querySelector('button');
+    button.classList.add('btn-loading');
+    button.disabled = true;
+
     const formData = new FormData(this);
     fetch('/chat', {
       method: 'POST',
@@ -60,7 +64,11 @@
         document.getElementById('suggestion-text').innerText = data.suggestion;
         document.getElementById('suggestion-card').style.display = 'block';
       })
-      .catch(error => console.error('Error:', error));
+      .catch(error => console.error('Error:', error))
+      .finally(() => {
+        button.classList.remove('btn-loading');
+        button.disabled = false;
+      });
   });
 </script>
 {% endblock %}
