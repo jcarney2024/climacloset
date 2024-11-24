@@ -18,7 +18,7 @@
    - Run the application:
 
      ```bash
-     flask run --host=0.0.0.0
+     flask run --debug --host=0.0.0.0
      ```
 
 4. **Access the app**:
