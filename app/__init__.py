@@ -4,6 +4,8 @@ from flask_login import LoginManager
 from flask_migrate import Migrate
 from dotenv import load_dotenv
 from datetime import timedelta
+import psycopg2
+import os
 
 # init SQLAlchemy so we can use it later in our models
 db = SQLAlchemy()
@@ -15,9 +17,13 @@ def create_app():
     
     app.config['REMEMBER_COOKIE_DURATION'] = timedelta(minutes=30)  # 30 days
 
-
-    app.config['SECRET_KEY'] = 'UnjxLHuQHLNSfmtwXRGTZvC0eqQm6v6w'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///climacloset.db'
+    app.config['SECRET_KEY'] = 'API_KEY'
+    
+    uri = os.getenv("DATABASE_URL")  # Get the database URL from environment variables
+    if uri and uri.startswith("postgres://"):
+        # Replace 'postgres://' with 'postgresql://'
+        uri = uri.replace("postgres://", "postgresql://", 1)
+    app.config['SQLALCHEMY_DATABASE_URI'] = uri
 
     db.init_app(app)
     migrate.init_app(app, db)
