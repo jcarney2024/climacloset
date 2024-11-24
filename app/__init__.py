@@ -4,7 +4,6 @@ from flask_login import LoginManager
 from flask_migrate import Migrate
 from dotenv import load_dotenv
 from datetime import timedelta
-import psycopg2
 import os
 
 # init SQLAlchemy so we can use it later in our models
@@ -50,9 +49,6 @@ def create_app():
     # Register error handler
     app.register_error_handler(404, page_not_found)
     
-    with app.app_context():
-        db.create_all()
-
     return app
 
 if __name__ == "__main__":
