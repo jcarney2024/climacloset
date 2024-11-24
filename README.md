@@ -28,12 +28,16 @@
 5. **Access the app**:
    - Forward port **5000** when prompted.
    - Open the forwarded port in your browser to view the app.
+  
+6. **Choose a feature to work on**:
+   - Choose a feature from the projects tab on GitHub
+   - Make sure to move it to a different category so no one else works on it!
 
 6. **Add a new branch**:
    - Don't forget that when developing a new feature, you should be working on a new branch
   
      ```bash
-     git checkout -b <branch-name>
+     git checkout -b <your-branch-name>
      ```
 
 7. **Make thoughtful commits when making progress**:
@@ -43,7 +47,7 @@
 
 8. **Push your changes (yay!)**:
    ```bash
-   git push origin <branch-name>
+   git push origin <your-branch-name>
    ```
 9. ***Make a Pull Request**:
    - On GitHub go to the pull requests tab
@@ -51,3 +55,8 @@
    - Add a title and description
    - Submit!
    - YAYYY
+
+10. **Tests and Preview Version**:
+   - When you submit a PR, tests are automatically ran, and you will be told if they pass.
+   - A preview version via Heroku will also be generated. View it to make sure everything is working right!
+   - Wait for collaboraters to approve your PR to merge branches!
