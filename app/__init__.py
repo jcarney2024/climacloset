@@ -16,7 +16,7 @@ def create_app():
     app.config['REMEMBER_COOKIE_DURATION'] = timedelta(minutes=30)  # 30 days
 
 
-    app.config['SECRET_KEY'] = 'UnjxLHuQHLNSfmtwXRGTZvC0eqQm6v6w'
+    app.config['SECRET_KEY'] = 'API_KEY'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///climacloset.db'
 
     db.init_app(app)
