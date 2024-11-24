@@ -3,40 +3,117 @@
 {% set active_page = "about" %}
 
 {% block body %}
-<!DOCTYPE html>
-<html lang="en">
+<div id="about" class="container my-5">
+  <header class="mb-4">
+    <h1>About Us</h1>
+    <hr class="divider" />
+  </header>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="../static/ClimaCloset.svg" type="image/svg+xml" />
-
-  <title>About</title>
-</head>
-
-<body>
-  <div class="container">
-    <header>
-      <h1>About</h1>
-      <hr class="divider" />
-    </header>
-
-    <div class="content">
-      <p>It's raining, let's add some drip to your fit!</p>
-      <p>
-        Designed by three Yale students, ClimaCloset is an web app that gives you
-        clothing recommendations based on the weather.
-      </p>
-    </div>
-
-    <p><strong>Contact Us:</strong></p>
-    <ul style="list-style: none; padding: 0; margin: 0">
-      <li><a href="mailto:j.carney@yale.edu">Jack Carney</a></li>
-      <li><a href="mailto:kelly.x.wu@yale.edu">Kelly Wu</a></li>
-      <li><a href="mailto:mandy.chen@yale.edu">Mandy Chen</a></li>
-    </ul>
+  <div class="content mb-5">
+    <p>It's raining, let's add some drip to your fit!</p>
+    <p>
+      Designed by three Yale students, ClimaCloset is a web app that gives you
+      clothing recommendations based on the weather.
+    </p>
   </div>
-</body>
-
-</html>
+  <div class="about-cards">
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <div class="card">
+          <div class="img jack"></div>
+          <span>Jack Carney</span>
+          <p class="info">Hi! I'm Jack. A full-stack web developer with a passion for
+            creating beautiful and functional websites. (I guess I'm also a student at <a
+              href="https://yale.edu">Yale</a>
+            in my free time)</p>
+          <div class="share">
+            <a href="https://github.com/jcarney2024"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+                <path
+                  d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z">
+                </path>
+              </svg></a>
+            <a href="https://www.linkedin.com/in/jackcarney2/"><svg xmlns="http://www.w3.org/2000/svg" width="20"
+                height="20" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
+                <path
+                  d="M0 1.146C0 .513.324 0 .725 0h14.55c.401 0 .725.513.725 1.146v13.708c0 .633-.324 1.146-.725 1.146H.725A.723.723 0 0 1 0 14.854V1.146zm4.943 12.248V6.169H3.127v7.225h1.816zm-.911-8.21c.607 0 .986-.422.986-.95-.011-.538-.379-.95-.973-.95-.594 0-.985.412-.985.95 0 .528.378.95.973.95h.009zm4.908 8.21V9.359c0-.216.016-.432.08-.586.176-.432.577-.88 1.25-.88.881 0 1.233.664 1.233 1.637v4.864h1.816V9.25c0-2.22-1.184-3.252-2.764-3.252-1.276 0-1.845.7-2.165 1.19h.03v-1.02H6.956c.02.66 0 7.225 0 7.225h1.816z">
+                </path>
+              </svg></a>
+            <a href="mailto:j.carney@yale.edu"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                <path
+                  d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.803 2.882L15 11.383V5.383zM1 5.383v6l4.803-2.882L1 5.383zm.396 6.418L8 8.617l6.604 3.184a1 1 0 0 0 .396-.801V5.383l-7 4.2-7-4.2v6.217a1 1 0 0 0 .396.801z">
+                </path>
+              </svg></a>
+          </div>
+          <button>Website</button>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <div class="img kelly"></div>
+          <span>Kelly Wu</span>
+          <p class="info">Hi! I'm Kelly. A full-stack web developer with a passion for
+            creating beautiful and functional websites. (I guess I'm also a student at <a
+              href="https://yale.edu">Yale</a>
+            in
+            my free time)</p>
+          <div class="share">
+            <a href="https://github.com/kewu16"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+                <path
+                  d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z">
+                </path>
+              </svg></a>
+            <a href="https://www.linkedin.com/in/kelly-x-wu/"><svg xmlns="http://www.w3.org/2000/svg" width="20"
+                height="20" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
+                <path
+                  d="M0 1.146C0 .513.324 0 .725 0h14.55c.401 0 .725.513.725 1.146v13.708c0 .633-.324 1.146-.725 1.146H.725A.723.723 0 0 1 0 14.854V1.146zm4.943 12.248V6.169H3.127v7.225h1.816zm-.911-8.21c.607 0 .986-.422.986-.95-.011-.538-.379-.95-.973-.95-.594 0-.985.412-.985.95 0 .528.378.95.973.95h.009zm4.908 8.21V9.359c0-.216.016-.432.08-.586.176-.432.577-.88 1.25-.88.881 0 1.233.664 1.233 1.637v4.864h1.816V9.25c0-2.22-1.184-3.252-2.764-3.252-1.276 0-1.845.7-2.165 1.19h.03v-1.02H6.956c.02.66 0 7.225 0 7.225h1.816z">
+                </path>
+              </svg></a>
+            <a href="mailto:kelly.x.wu@yale.edu"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                <path
+                  d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.803 2.882L15 11.383V5.383zM1 5.383v6l4.803-2.882L1 5.383zm.396 6.418L8 8.617l6.604 3.184a1 1 0 0 0 .396-.801V5.383l-7 4.2-7-4.2v6.217a1 1 0 0 0 .396.801z">
+                </path>
+              </svg></a>
+          </div>
+          <button>Website</button>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <div class="img mandy"></div>
+          <span>Mandy Chen</span>
+          <p class="info">Hi! I'm Mandy. A full-stack web developer with a passion for
+            creating beautiful and functional websites. (I guess I'm also a student at <a
+              href="https://yale.edu">Yale</a>
+            in
+            my free time)</p>
+          <div class="share">
+            <a href="https://github.com/MandyyyChen"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+                <path
+                  d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z">
+                </path>
+              </svg></a>
+            <a href="https://www.linkedin.com/in/mandychenn/"><svg xmlns="http://www.w3.org/2000/svg" width="20"
+                height="20" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
+                <path
+                  d="M0 1.146C0 .513.324 0 .725 0h14.55c.401 0 .725.513.725 1.146v13.708c0 .633-.324 1.146-.725 1.146H.725A.723.723 0 0 1 0 14.854V1.146zm4.943 12.248V6.169H3.127v7.225h1.816zm-.911-8.21c.607 0 .986-.422.986-.95-.011-.538-.379-.95-.973-.95-.594 0-.985.412-.985.95 0 .528.378.95.973.95h.009zm4.908 8.21V9.359c0-.216.016-.432.08-.586.176-.432.577-.88 1.25-.88.881 0 1.233.664 1.233 1.637v4.864h1.816V9.25c0-2.22-1.184-3.252-2.764-3.252-1.276 0-1.845.7-2.165 1.19h.03v-1.02H6.956c.02.66 0 7.225 0 7.225h1.816z">
+                </path>
+              </svg></a>
+            <a href="mailto:mandy.chen@yale.edu"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                <path
+                  d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.803 2.882L15 11.383V5.383zM1 5.383v6l4.803-2.882L1 5.383zm.396 6.418L8 8.617l6.604 3.184a1 1 0 0 0 .396-.801V5.383l-7 4.2-7-4.2v6.217a1 1 0 0 0 .396.801z">
+                </path>
+              </svg></a>
+          </div>
+          <button>Website</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

@@ -1,5 +1,5 @@
 .btn-primaryblue {
-  background-color: #86a3bf;
+  background-color: #AFB3F7;
   /* Light Blue */
   color: white;
   /* Text Color */
@@ -11,4 +11,142 @@
   /* Dark Blue */
   color: white;
   /* Text color stays white */
+}
+
+footer {
+  background-color: #ffffff;
+}
+
+/* Future Background Functionality */
+/* body {
+  background: rgb(175, 179, 247);
+  background: linear-gradient(217deg, rgba(175, 179, 247, 1) 0%, rgba(146, 188, 234, 1) 50%, rgba(122, 147, 172, 1) 100%);
+} */
+
+.about-cards .card {
+  width: 21.25em;
+  height: 28.125em;
+  background: #92BCEA;
+  transition: 1s ease-in-out;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.about-cards .card span {
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  display: block;
+  font-size: 1.25em;
+  /* Increased from 1em */
+}
+
+.about-cards .card .info {
+  font-weight: 400;
+  color: white;
+  display: block;
+  text-align: center;
+  font-size: 0.9em;
+  /* Increased from 0.72em */
+  margin: 1em;
+}
+
+.about-cards .card .img.jack {
+  width: 6em;
+  height: 6em;
+  border-radius: 15px;
+  background-image: url("jack.jpeg");
+  background-size: cover;
+  margin: auto;
+}
+
+.about-cards .card .img.kelly {
+  width: 6em;
+  height: 6em;
+  border-radius: 15px;
+  background-image: url("kelly.jpeg");
+  background-size: cover;
+  margin: auto;
+}
+
+.about-cards .card .img.mandy {
+  width: 6em;
+  height: 6em;
+  border-radius: 15px;
+  background-image: url("mandy.jpeg");
+  background-size: cover;
+  margin: auto;
+}
+
+.about-cards .card .share {
+  margin-top: 1em;
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+}
+
+.about-cards .card a {
+  color: white;
+  transition: .4s ease-in-out;
+}
+
+.about-cards .card a:hover {
+  color: #7A93AC;
+}
+
+.about-cards .card button {
+  padding: 0.8em 1.7em;
+  display: block;
+  margin: auto;
+  border-radius: 25px;
+  border: none;
+  font-weight: bold;
+  background: #ffffff;
+  color: #171A21;
+  transition: .4s ease-in-out;
+}
+
+.about-cards .card button:hover {
+  background: #7A93AC;
+  color: white;
+  cursor: pointer;
+}
+
+ul.no-bullets {
+  display: flex;
+  list-style-type: none;
+  /* Remove bullets */
+  padding: 0;
+  /* Remove padding */
+  margin: 0;
+  /* Remove margins */
+}
+
+.btn-loading {
+  background-color: #707070;
+  /* Gray color when loading */
+  cursor: not-allowed;
+  position: relative;
+  text-indent: -9999px;
+}
+
+.btn-loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1em;
+  height: 1em;
+  margin: -0.5em 0 0 -0.5em;
+  border: 2px solid white;
+  border-top: 2px solid #333;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
