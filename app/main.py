@@ -60,9 +60,10 @@ def explore():
 @main.route('/chat', methods=['POST'])
 def chat():
     temp = request.form.get('temp')
-    genai.configure(api_key=os.environ["API_KEY"])
+    #genai.configure(api_key=os.environ["API_KEY"])
+    genai.configure(api_key="AIzaSyAUjVArswFob0VQuXFNf3MRz3a7v2lBXUU")
     model = genai.GenerativeModel("gemini-1.5-flash")
-    response = model.generate_content(f"Generate clothing suggestions based on the temperature: {temp}. Only give one sentence response with what to wear in simple terms.")
+    response = model.generate_content(f"Generate clothing suggestions based on the temperature: {temp}. Only give one short(ish) response with what to wear in simple terms for an outfit.")
     
     suggestion = response.text if response.text else "No suggestion available."
     

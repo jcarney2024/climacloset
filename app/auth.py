@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, user_logged_in
 from .models import User
 from . import db
 
@@ -8,6 +8,8 @@ auth = Blueprint('auth', __name__)
 
 @auth.route('/login')
 def login():
+    if user_logged_in:
+        return redirect(url_for('main.profile'))
     return render_template('login.html')
 
 @auth.route('/login', methods=['POST'])
@@ -18,6 +20,10 @@ def login_post():
     remember = True if request.form.get('remember') else False
 
     user = User.query.filter_by(email=email).first()
+    
+    flash('Logged in successfully.')
+    
+    next = request.args.get('next')
 
     # check if the user actually exists
     # take the user-supplied password, hash it, and compare it to the hashed password in the database
@@ -26,10 +32,12 @@ def login_post():
         return redirect(url_for('auth.login')) # if the user doesn't exist or password is wrong, reload the page
 
     login_user(user, remember=remember)
-    return redirect(url_for('main.profile'))
+    return redirect(next or url_for('main.profile'))
 
 @auth.route('/signup')
 def signup():
+    if user_logged_in:
+        return redirect(url_for('main.profile'))
     return render_template('signup.html')
 
 @auth.route('/signup', methods=['POST'])
@@ -37,11 +45,21 @@ def signup_post():
     name = request.form.get('name')
     email = request.form.get('email')
     password = request.form.get('password')
+    confirmation = request.form.get('confirmation')
+    code = request.form.get('code')
 
+    if code != 'test':
+        flash('Invalid invite code.')
+        return redirect(url_for('auth.signup'))
+    
+    if confirmation != password:
+        flash('Passwords do not match.')
+        return redirect(url_for('auth.signup'))
 
     user = User.query.filter_by(email=email).first() # if this returns a user, then the email already exists in database
 
     if user: # if a user is found, we want to redirect back to signup page so user can try again
+        flash(f'Email address already exists. <a href="{url_for("auth.login", email=email)}">Sign in</a>')
         return redirect(url_for('auth.signup'))
 
     # create a new user with the form data. Hash the password so the plaintext version isn't saved.
