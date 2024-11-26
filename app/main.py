@@ -1,12 +1,10 @@
-from email.mime import image
 from flask import Blueprint, render_template, request, jsonify
 from flask_login import login_required, current_user
-from . import db
 import requests
 from dotenv import load_dotenv
-import os
 import random
 import google.generativeai as genai
+import os
 
 load_dotenv()
 
@@ -15,6 +13,7 @@ def page_not_found(e):
 
 main = Blueprint('main', __name__)
 
+@main.route('/index')
 @main.route('/')
 def index():
     latitude = request.args.get('latitude', '41.3081')
@@ -60,8 +59,8 @@ def explore():
 @main.route('/chat', methods=['POST'])
 def chat():
     temp = request.form.get('temp')
-    #genai.configure(api_key=os.environ["API_KEY"])
-    genai.configure(api_key="AIzaSyAUjVArswFob0VQuXFNf3MRz3a7v2lBXUU")
+    # Remove hardcoded API key
+    genai.configure(api_key=os.environ.get("API_KEY"))
     model = genai.GenerativeModel("gemini-1.5-flash")
     response = model.generate_content(f"Generate clothing suggestions based on the temperature: {temp}. Only give one short(ish) response with what to wear in simple terms for an outfit.")
     

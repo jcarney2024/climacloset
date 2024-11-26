@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% block title %} Register {% endblock %}
 
+{% set active_page = "signup" %}
+
 {% block css %}
 <link rel="stylesheet" href="../static/login.css">
 <style>
@@ -53,66 +55,118 @@
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
         {% for category, message in messages %}
-        <div class="alert alert-warning" role="alert">
-          <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Warning:">
-            <use xlink:href="#exclamation-triangle-fill" />
+        {% if category == "green" %}
+        <div class="alert alert-success" role="alert">
+          <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:">
+            <use xlink:href="#check-circle-fill" />
           </svg>
           <div>
             {{ message | safe }}
           </div>
         </div>
-        {% endfor %}
-        {% endif %}
-        {% endwith %}
-        <!-- Name Field -->
-        <div class="flex-column">
-          <label for="name" class="form-label">Name</label>
-        </div>
-        <div class="inputForm">
-          <input type="text" name="name" id="name" class="input" placeholder="Enter your name" autocomplete="off"
-            required />
-        </div>
-        <!-- Email Field -->
-        <div class="flex-column">
-          <label for="email" class="form-label">Email</label>
-        </div>
-        <div class="inputForm">
-          <input type="email" name="email" id="email" class="input" placeholder="Enter your email" autocomplete="off"
-            required />
-        </div>
-        <!-- Password Field -->
-        <div class="flex-column">
-          <label for="password" class="form-label">Password</label>
-        </div>
-        <div class="inputForm">
-          <input type="password" name="password" id="password" class="input" placeholder="Enter your password"
-            required />
-        </div>
-        <!-- Password Confirmation Field -->
-        <div class="flex-column">
-          <label for="confirmation" class="form-label">Confirm Password</label>
-        </div>
-        <div class="inputForm">
-          <input type="password" name="confirmation" id="confirmation" class="input"
-            placeholder="Re-enter your password" required />
-        </div>
-        <!-- Signup Code Field -->
-        <div class="flex-column">
-          <label for="code" class="form-label muted">
-            <a class="form-label" data-bs-toggle="tooltip"
-              data-bs-title="We're still in beta. Ask us for an invite!">Invite Code</a>
-          </label>
-        </div>
-        <div class="inputForm">
-          <input type="text" name="code" id="code" class="input" placeholder="Enter your Invite Code" autocomplete="off"
-            required />
-        </div>
-        <input type="hidden" name="prefill_email" id="prefill_email" value="{{ request.form.email }}">
-        <!-- Submit Button -->
-        <button type="submit" class="button-submit">Register</button>
-        <p class="p">Already have an account? <a href="/login" class="span">Log In</a></p>
+        {% elif category == "blue" %}
+        <div class="alert alert-primary" role="alert">
+          <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Info:">
+            <use xlink:href="#info-fill" />
+          </svg>
+          <div>
+            {{ message | safe }}
+          </div>
+          {% else %}
+          <div class="alert alert-warning" role="alert">
+            <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Warning:">
+              <use xlink:href="#exclamation-triangle-fill" />
+            </svg>
+            <div>
+              {{ message | safe }}
+            </div>
+          </div>
+          {% endif %}
+          {% endfor %}
+          {% endif %}
+          {% endwith %}
+          <!-- Name Field -->
+          <div class="flex-column">
+            <label for="name" class="form-label">Name</label>
+          </div>
+          <div class="inputForm">
+            <input type="text" name="name" id="name" class="input" placeholder="Enter your name" autocomplete="off"
+              required />
+          </div>
+          <!-- Email Field -->
+          <div class="flex-column">
+            <label for="email" class="form-label">Email</label>
+          </div>
+          <div class="inputForm">
+            <input type="email" name="email" id="email" class="input" placeholder="Enter your email" autocomplete="off"
+              required />
+          </div>
+          <!-- Password Field -->
+          <div class="flex-column">
+            <label for="password" class="form-label">Password</label>
+          </div>
+          <div class="inputForm">
+            <input type="password" name="password" id="password" class="input" placeholder="Enter your password"
+              required />
+          </div>
+          <!-- Password Confirmation Field -->
+          <div class="flex-column">
+            <label for="confirmation" class="form-label">Confirm Password</label>
+          </div>
+          <div class="inputForm">
+            <input type="password" name="confirmation" id="confirmation" class="input"
+              placeholder="Re-enter your password" required />
+          </div>
+          <!-- Signup Code Field -->
+          <div class="flex-column">
+            <label for="code" class="form-label muted">
+              <a class="form-label" data-bs-toggle="tooltip"
+                data-bs-title="We're still in beta. Ask us for an invite!">Invite Code</a>
+            </label>
+          </div>
+          <div class="inputForm">
+            <input type="text" name="code" id="code" class="input" placeholder="Enter your Invite Code"
+              autocomplete="off" required />
+          </div>
+          <input type="hidden" name="prefill_email" id="prefill_email" value="{{ request.form.email }}">
+          <!-- Submit Button -->
+          <button type="submit" class="button-submit">Register</button>
+          <p class="p">Already have an account? <a href="/login" class="span">Log In</a></p>
       </form>
     </div>
   </div>
 </div>
+{% endblock %}
+
+{% block js %}
+<script>
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+  })
+  const togglePassword =
+    document.querySelector('#show');
+
+  const password =
+    document.querySelector('#password');
+
+  togglePassword.
+    addEventListener('click', function (e) {
+
+      // Toggle the type attribute
+      const type = password.getAttribute(
+        'type') === 'password' ? 'text' : 'password';
+      password.setAttribute('type', type);
+
+      // Toggle the eye slash icon
+      if (togglePassword.src.match(
+        "https://media.geeksforgeeks.org/wp-content/uploads/20210917150049/eyeslash.png")) {
+        togglePassword.src =
+          "https://media.geeksforgeeks.org/wp-content/uploads/20210917145551/eye.png";
+      } else {
+        togglePassword.src =
+          "https://media.geeksforgeeks.org/wp-content/uploads/20210917150049/eyeslash.png";
+      }
+    });
+</script>
 {% endblock %}
