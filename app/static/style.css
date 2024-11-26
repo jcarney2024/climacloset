@@ -122,31 +122,3 @@ ul.no-bullets {
   margin: 0;
   /* Remove margins */
 }
-
-.btn-loading {
-  background-color: #707070;
-  /* Gray color when loading */
-  cursor: not-allowed;
-  position: relative;
-  text-indent: -9999px;
-}
-
-.btn-loading::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 1em;
-  height: 1em;
-  margin: -0.5em 0 0 -0.5em;
-  border: 2px solid white;
-  border-top: 2px solid #333;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
