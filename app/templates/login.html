@@ -194,6 +194,9 @@
     </div>
   </div>
 </div>
+{% endblock %}
+
+{% block js %}
 <script>
   function openModal() {
     document.getElementById('modal-container').style.display = 'flex';
@@ -202,50 +205,35 @@
   function closeModal() {
     document.getElementById('modal-container').style.display = 'none';
   }
-</script>
-<script>
+
   document.getElementById('login').addEventListener('submit', function (event) {
     event.preventDefault();
     const button = this.querySelector('.button-submit');
     button.disabled = true;
     button.textContent = ''; // Hide button text
     const spinner = document.createElement('span');
-    spinner.innerHTML = `
-      <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>`;
+    spinner.innerHTML = `<span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>`;
     button.appendChild(spinner);
     this.submit(); // Submit the form
   });
-{% endblock %}
 
-{% block js %}
-<script>
-  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
   var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-    return new bootstrap.Tooltip(tooltipTriggerEl)
-  })
-  const togglePassword =
-    document.querySelector('#show');
+    return new bootstrap.Tooltip(tooltipTriggerEl);
+  });
 
-  const password =
-    document.querySelector('#password');
+  const togglePassword = document.querySelector('#show');
+  const password = document.querySelector('#password');
 
-  togglePassword.
-    addEventListener('click', function (e) {
+  togglePassword.addEventListener('click', function () {
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
 
-      // Toggle the type attribute
-      const type = password.getAttribute(
-        'type') === 'password' ? 'text' : 'password';
-      password.setAttribute('type', type);
-
-      // Toggle the eye slash icon
-      if (togglePassword.src.match(
-        "https://media.geeksforgeeks.org/wp-content/uploads/20210917150049/eyeslash.png")) {
-        togglePassword.src =
-          "https://media.geeksforgeeks.org/wp-content/uploads/20210917145551/eye.png";
-      } else {
-        togglePassword.src =
-          "https://media.geeksforgeeks.org/wp-content/uploads/20210917150049/eyeslash.png";
-      }
-    });
+    if (togglePassword.src.match("eyeslash.png")) {
+      togglePassword.src = "eye.png";
+    } else {
+      togglePassword.src = "eyeslash.png";
+    }
+  });
 </script>
 {% endblock %}
