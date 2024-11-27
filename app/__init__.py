@@ -4,11 +4,13 @@ from flask_login import LoginManager
 from flask_migrate import Migrate
 from dotenv import load_dotenv
 from datetime import timedelta
+from flask_compress import Compress
 import os
 
 # init SQLAlchemy so we can use it later in our models
 db = SQLAlchemy()
 migrate = Migrate()
+compress = Compress()
 login_manager = LoginManager()
 
 def create_app():
@@ -29,6 +31,7 @@ def create_app():
 
     db.init_app(app)
     migrate.init_app(app, db)
+    compress.init_app(app)
     
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
