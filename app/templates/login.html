@@ -133,4 +133,17 @@
     document.getElementById('modal-container').style.display = 'none';
   }
 </script>
+<script>
+  document.getElementById('login').addEventListener('submit', function (event) {
+    event.preventDefault();
+    const button = this.querySelector('.button-submit');
+    button.disabled = true;
+    button.textContent = ''; // Hide button text
+    const spinner = document.createElement('span');
+    spinner.innerHTML = `
+      <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>`;
+    button.appendChild(spinner);
+    this.submit(); // Submit the form
+  });
+</script>
 {% endblock %}
