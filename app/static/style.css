@@ -1,16 +1,35 @@
-.btn-primaryblue {
-  background-color: #AFB3F7;
+.btn-primary {
+  background-color: #84a1b9;
   /* Light Blue */
   color: white;
   /* Text Color */
   border: none;
 }
 
-.btn-primaryblue:hover {
-  background-color: #151f55;
+.text-body-emphasis {
+  color: #545484 !important;
+}
+
+.btn-primary:hover {
+  background-color: #1b224e;
   /* Dark Blue */
   color: white;
   /* Text color stays white */
+}
+
+.btn-outline-secondary {
+  border-color: #1b224e;
+  color: #1b224e;
+}
+
+.nav-link {
+  color: #545484 !important;
+  font-weight: bold !important;
+}
+
+.link-secondary {
+  color: #6c757d !important;
+  font-weight: normal !important;
 }
 
 footer {
@@ -121,32 +140,4 @@ ul.no-bullets {
   /* Remove padding */
   margin: 0;
   /* Remove margins */
-}
-
-.btn-loading {
-  background-color: #707070;
-  /* Gray color when loading */
-  cursor: not-allowed;
-  position: relative;
-  text-indent: -9999px;
-}
-
-.btn-loading::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 1em;
-  height: 1em;
-  margin: -0.5em 0 0 -0.5em;
-  border: 2px solid white;
-  border-top: 2px solid #333;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
 }
