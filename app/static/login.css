@@ -153,3 +153,8 @@ a {
     max-height: 90%;
     overflow-y: auto;
 }
+
+a.disabled {
+    pointer-events: none;
+    cursor: default;
+}

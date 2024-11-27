@@ -119,9 +119,12 @@
           </div>
           <!-- Signup Code Field -->
           <div class="flex-column">
-            <label for="code" class="form-label muted">
-              <a class="form-label" data-bs-toggle="tooltip"
-                data-bs-title="We're still in beta. Ask us for an invite!">Invite Code</a>
+            <label for="code" class="form-label">
+              <span data-bs-toggle="tooltip" data-bs-placement="top" title="We're still in beta. Ask us for an invite!">
+                <a href="#" class="disabled">
+                  Invite Code
+                </a>
+              </span>
             </label>
           </div>
           <div class="inputForm">
@@ -137,6 +140,12 @@
   </div>
 </div>
 <script>
+  // Initialize tooltips properly after DOM is loaded
+  document.addEventListener('DOMContentLoaded', function () {
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+  });
+
   document.getElementById('signup').addEventListener('submit', function (event) {
     event.preventDefault();
     const button = this.querySelector('.button-submit');

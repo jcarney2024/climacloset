@@ -1,9 +1,0 @@
-/* ...existing code... */
-
-/* Add or update the following to prevent overriding the primary color */
-.btn-primary {
-    background-color: var(--bs-primary) !important;
-    border-color: var(--bs-primary) !important;
-}
-
-/* ...existing code... */
