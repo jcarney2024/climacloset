@@ -51,8 +51,14 @@
   document.getElementById('chat-form').addEventListener('submit', function (event) {
     event.preventDefault();
     const button = this.querySelector('button');
-    button.classList.add('btn-loading');
     button.disabled = true;
+    button.textContent = ''; // Hide button text
+    const spinner = document.createElement('span');
+    spinner.innerHTML = `
+    <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+    <span role="status">Loading...</span>
+    `;
+    button.appendChild(spinner);
 
     const formData = new FormData(this);
     fetch('/chat', {
@@ -66,8 +72,9 @@
       })
       .catch(error => console.error('Error:', error))
       .finally(() => {
-        button.classList.remove('btn-loading');
+        button.removeChild(spinner);
         button.disabled = false;
+        button.textContent = 'Get Your Outfit Suggestion!'; // Restore button text
       });
   });
 </script>
