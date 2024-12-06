@@ -5,8 +5,22 @@ from dotenv import load_dotenv
 import random
 import google.generativeai as genai
 import os
+import json
 
 load_dotenv()
+
+# Load town data when the app starts
+towns = []
+with open('app/static/place-town.ndjson', 'r') as f:
+    for line in f:
+        line = line.strip()
+        if not line:
+            continue  # Skip empty lines
+        try:
+            town = json.loads(line)
+            towns.append(town)
+        except json.JSONDecodeError:
+            continue  # Skip invalid JSON lines
 
 def page_not_found(e):
     return render_template('404.html', e=e), 404
@@ -73,9 +87,33 @@ def chat():
     model_name="gemini-1.5-flash",
     generation_config=generation_config,
     )
-    
+
     genai.configure(api_key="AIzaSyAUjVArswFob0VQuXFNf3MRz3a7v2lBXUU")
     response = model.generate_content(f"Generate clothing suggestions based on the temperature: {temp} degrees farenheit. Only give one sentence response with what to wear in simple terms for an outfit.")
     suggestion = response.text if response.text else "No suggestion available."
 
     return jsonify({'suggestion': suggestion})
+
+@main.route('/autocomplete')
+def autocomplete():
+    q = request.args.get('q', '').lower()
+    suggestions = []
+    if len(q) >= 2:
+        for town in towns:
+            name = town.get('name')
+            if not name:
+                continue  # Skip if 'name' is missing
+            state = town.get('address', {}).get('state', '')
+            if q in name.lower():
+                location = town.get('location', [None, None])
+                if location and len(location) >= 2:
+                    latitude = location[1]
+                    longitude = location[0]
+                    suggestions.append({
+                        'name': f"{name}, {state}",
+                        'latitude': latitude,
+                        'longitude': longitude
+                    })
+            if len(suggestions) >= 20:
+                break
+    return jsonify(suggestions)
