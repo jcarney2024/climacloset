@@ -14,4 +14,19 @@
   </svg> </h1>
   
 
+  <div class="profile-container">
+    <img src="{{ current_user.profile_picture_url }}" alt="Profile Picture" class="profile-img">
+    
+    <div class="profile-info">
+      <p><strong>Name:</strong> {{ name }}</p>
+      <p><strong>Email:</strong> {{ current_user.email }}</p>
+    </div>
+  
+    <form action="/profile/upload_picture" method="POST" enctype="multipart/form-data">
+      <label for="profile_picture" class="btn btn-primary upload-btn">Upload Profile Picture</label>
+      <input type="file" id="profile_picture" name="profile_picture" style="display: none;">
+      <button type="submit" class="btn btn-success upload-btn">Submit</button>
+    </form>
+  </div>
+
 {% endblock %}
