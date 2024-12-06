@@ -60,10 +60,22 @@ def explore():
 def chat():
     temp = request.form.get('temp')
     # Remove hardcoded API key
-    genai.configure(api_key=os.environ.get("API_KEY"))
-    model = genai.GenerativeModel("gemini-1.5-flash")
-    response = model.generate_content(f"Generate clothing suggestions based on the temperature: {temp}. Only give one short(ish) response with what to wear in simple terms for an outfit.")
     
+    generation_config = {
+    "temperature": 1,
+    "top_p": 0.95,
+    "top_k": 40,
+    "max_output_tokens": 8192,
+    "response_mime_type": "text/plain",
+    }
+    
+    model = genai.GenerativeModel(
+    model_name="gemini-1.5-flash",
+    generation_config=generation_config,
+    )
+    
+    genai.configure(api_key="AIzaSyAUjVArswFob0VQuXFNf3MRz3a7v2lBXUU")
+    response = model.generate_content(f"Generate clothing suggestions based on the temperature: {temp} degrees farenheit. Only give one sentence response with what to wear in simple terms for an outfit.")
     suggestion = response.text if response.text else "No suggestion available."
-    
+
     return jsonify({'suggestion': suggestion})
