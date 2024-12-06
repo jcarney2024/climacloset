@@ -8,18 +8,11 @@
   <div class="col-md-4 mx-auto">
     <p class="lead mb-4">Select a location to check the weather:</p>
 
-    <!-- Dropdown for location selection -->
-    <select id="location-select" class="form-select mb-3 btn-sm" onchange="sendGetRequest.call(this)">
-      <option value="41.3081,-72.9282" {% if selected_location=='41.3081,-72.9282' %} selected {% endif %}>New Haven,
-        CT</option>
-      <option value="40.7128,-74.0060" {% if selected_location=='40.7128,-74.0060' %} selected {% endif %}>New York, NY
-      </option>
-      <option value="34.0522,-118.2437" {% if selected_location=='34.0522,-118.2437' %} selected {% endif %}>Los
-        Angeles, CA</option>
-      <option value="51.5074,-0.1278" {% if selected_location=='51.5074,-0.1278' %} selected {% endif %}>London, UK
-      </option>
-      <!-- Add more locations as needed -->
-    </select>
+    <!-- Wrap the input and suggestions in a relative container -->
+    <div style="position: relative;">
+      <input type="text" id="location-input" class="form-control" placeholder="Enter a location" autocomplete="off">
+      <div id="suggestions" class="list-group mb-3"></div>
+    </div>
 
     <img id="weather-image" src="{{ image }}" alt="Weather Image" defer width="200" height="200" />
     <div id="weather-info" defer>The current temperature is {{ temp }}°F.</div>
@@ -45,6 +38,17 @@
     </div>
   </div>
 </div>
+
+<style>
+  #suggestions {
+    max-height: 160px;
+    overflow-y: auto;
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
+    background-color: white;
+  }
+</style>
 
 <script src="/static/weather.js" defer></script>
 <script>
