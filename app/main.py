@@ -2,7 +2,6 @@ from flask import Blueprint, render_template, request, jsonify
 from flask_login import login_required, current_user
 import requests
 from dotenv import load_dotenv
-import random
 import google.generativeai as genai
 import os
 
@@ -22,26 +21,26 @@ def index():
 
     api_url = f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&current_weather=true&temperature_unit=fahrenheit"
 
+
     try:
         response = requests.get(api_url)
         response.raise_for_status()
         weather_data = response.json()
         temp = weather_data['current_weather']['temperature']
+        weather_code = weather_data['current_weather']['weathercode']
     except requests.RequestException as e:
         temp = None
-        
-    # List of image paths
-    images = [
-    "../static/rain.svg",
-    "../static/sun_cloud.svg",
-    "../static/windy.svg",
-    ]
+        weather_code = None
 
-    # Choose a random image from the list
-    random_index = random.randint(0, len(images) - 1)
-    random_image = images[random_index]
+    if weather_code in [61, 63, 65, 80, 81, 82]:  # rain 
+        weather_icon = "../static/rain.svg"
+    elif weather_code in [45, 48, 95]:  # windy or stormy conditions
+        weather_icon = "../static/windy.svg"
+    else:
+        weather_icon = "../static/sun_cloud.svg"  # sunny weather    
 
-    return render_template('index.html', temp=temp, selected_location=selected_location, image=random_image)
+    return render_template('index.html', temp=temp, selected_location=selected_location, image=weather_icon)
+
 
 @main.route('/profile')
 @login_required
