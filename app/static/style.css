@@ -1,3 +1,10 @@
+/* General Styling */
+body {
+  background-color: #f1f3f8;
+  margin: 0;
+  padding: 0;
+}
+
 .btn-primary {
   background-color: #84a1b9;
   /* Light Blue */
@@ -142,19 +149,23 @@ ul.no-bullets {
   /* Remove margins */
 }
 
-/*Profile*/
+
+/* Profile Title */
 .title {
   text-align: center;
   margin-top: 50px;
+  font-size: 2.5em;
+  color: #333;
 }
 
 .profile-container {
-  background-color: #1b224e; /* Blue background */
-  border-radius: 15px; /* Rounded corners */
+  background: #1b224e; 
+  border-radius: 15px; 
   padding: 30px;
-  width: 300px;
+  width: 100%;
+  max-width: 350px; 
   margin: 50px auto;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
@@ -166,6 +177,7 @@ ul.no-bullets {
 .profile-info p {
   font-size: 18px;
   margin: 5px 0;
+  line-height: 1.5;
 }
 
 .profile-img {
@@ -177,6 +189,7 @@ ul.no-bullets {
   margin-bottom: 20px;
 }
 
+/* Upload Button */
 .upload-btn {
   margin-top: 15px;
   background-color: #84a1b9; /* A darker blue for the upload button */
@@ -185,13 +198,21 @@ ul.no-bullets {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .upload-btn:hover {
-  background-color: #5c7893; /* Use a new blue shade for hover */
+  background-color: #5c7893; /* New blue shade for hover */
+  transform: translateY(-2px); /* Slight lift on hover */
 }
 
+.upload-btn:active {
+  background-color: #5c7893;
+  transform: translateY(1px); /* Slight press effect */
+}
 
+/* File Upload Input */
 .upload-form input[type="file"] {
   display: none;
 }
@@ -204,13 +225,64 @@ ul.no-bullets {
   color: white;
   display: inline-block;
   margin-top: 10px;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
 }
 
 .upload-form label:hover {
-  background-color: #687ba4; 
+  background-color: #5c7893; 
 }
 
-.upload-btn:active, .upload-btn:focus {
-  background-color: #84a1b9; /* Ensure it's the same blue color when clicked or focused */
-  outline: none; /* Remove default focus outline (optional) */
+/* Edit Name Form */
+.edit-name-form {
+  margin-top: 30px;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+.edit-name-form label {
+  font-size: 1.1em;
+  color: #fff;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.edit-name-form input {
+  width: 80%;
+  padding: 12px;
+  font-size: 1.1em;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.edit-name-form input:focus {
+  border-color: #84a1b9; 
+}
+
+.edit-name-form button {
+  font-size: 1.2em;
+  padding: 10px 30px;
+  background-color:#545484; 
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-name-form button:hover {
+  background-color: #545484; 
+}
+
+.edit-name-form button:active {
+  background-color: #545484;
+  transform: translateY(1px); 
+}
+
+.edit-name-form button:focus {
+  outline: none;
 }
