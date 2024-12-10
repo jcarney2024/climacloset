@@ -19,20 +19,30 @@
     text-align: center; 
 }
 
-
-.col-lg-4 {
-    margin-bottom: 20px;
+/* Add space between the image and the button */
+.col-lg-4 img {
+    margin-bottom: 20px; /* Adds space below the image */
 }
 
+.col-lg-4 .btn {
+    margin-top: 20px; /* Adds space above the button */
+}
+
+/* Responsive design for smaller screens */
 @media (max-width: 768px) {
+    .col-lg-4 {
+        margin-bottom: 20px; /* Ensures there's spacing between columns */
+    }
+
     .d-sm-flex {
         display: block !important;
     }
 
     .d-sm-flex .btn {
-        margin-top: 10px;
+        margin-top: 10px; /* Adjust space above the button on small screens */
     }
 }
+
     </style>
 {% endblock %}
 
