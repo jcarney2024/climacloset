@@ -67,7 +67,35 @@ def about():
 
 @main.route('/explore')
 def explore():
-    return render_template('explore.html')
+    import requests  # Ensure the requests library is imported.
+
+    locations = {
+        "Chicago": {"latitude": "41.8781", "longitude": "-87.6298"},
+        "San Francisco": {"latitude": "37.7749", "longitude": "-122.4194"},
+        "New York": {"latitude": "40.7128", "longitude": "-74.0060"}
+    }
+    
+    # Fetch weather data
+    weather_data = {}
+    for city, coords in locations.items():
+        api_url = f"https://api.open-meteo.com/v1/forecast?latitude={coords['latitude']}&longitude={coords['longitude']}&current_weather=true&temperature_unit=fahrenheit"
+        try:
+            response = requests.get(api_url)
+            response.raise_for_status()  # Raise an HTTPError for bad responses
+            data = response.json()
+            
+            # Extract the current temperature from the response
+            weather_data[city] = data.get("current_weather", {}).get("temperature")
+        except requests.RequestException as e:
+            weather_data[city] = None  # Handle failure gracefully
+    
+    # Pass temperatures to the template
+    return render_template(
+        'explore.html',
+        chicago_temp=weather_data.get("Chicago"),
+        sf_temp=weather_data.get("San Francisco"),
+        ny_temp=weather_data.get("New York")
+    )
 
 @main.route('/chat', methods=['POST'])
 def chat():

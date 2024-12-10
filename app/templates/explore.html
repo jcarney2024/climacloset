@@ -11,6 +11,122 @@
 
     <div class="content mb-5">
         <p>Curious? Check out these popular cities!</p>
+
+        <div class="container marketing text-center">
+            <div class="row justify-content-center">
+                <!-- New York -->
+                <div class="col-lg-4">
+                    <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="static/NewYork.jpg" alt="New York">
+                    <br> 
+                    <br>
+                    <h2 class="fw-normal">New York</h2>
+                    <p>Explore the energy of the Big Apple!</p>
+                    <!-- Display weather information -->
+                    <div class="mb-3">
+                        {% if ny_temp %}
+                            <p>The current temperature in New York is {{ ny_temp }}°F.</p>
+                        {% else %}
+                            <p>Unable to fetch the current temperature.</p>
+                        {% endif %}
+                    </div>
+                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                        <form class="chat-form" action="/chat" method="POST">
+                            <input type="hidden" name="temp" value="{{ ny_temp }}">
+                            <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Get Your Outfit Suggestion!</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!--San Francisco -->
+                <div class="col-lg-4">
+                    <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="static/San_Francisco.jpeg" alt="San Francisco">
+                    <br> 
+                    <br>
+                    <h2 class="fw-normal">San Francisco</h2>
+                    <p>Discover the charm of the Bay Area!</p>
+                    <!-- Display weather information -->
+                    <div class="mb-3">
+                        {% if sf_temp %}
+                            <p>The current temperature in San Francisco is {{ sf_temp }}°F.</p>
+                        {% else %}
+                            <p>Unable to fetch the current temperature.</p>
+                        {% endif %}
+                    </div>
+                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                        <form class="chat-form" action="/chat" method="POST">
+                            <input type="hidden" name="temp" value="{{ sf_temp }}">
+                            <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Get Your Outfit Suggestion!</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Chicago -->
+                <div class="col-lg-4">
+                    <img class="bd-placeholder-img rounded-circle" width="140" height="140" src="static/Chicago.jpg" alt="Chicago">
+                    <br> 
+                    <br>
+                    <h2 class="fw-normal">Chicago</h2>
+                    <p>The Windy City awaits!</p>
+                    <!-- Display weather information -->
+                    <div class="mb-3">
+                        {% if chicago_temp %}
+                            <p>The current temperature in Chicago is {{ chicago_temp }}°F.</p>
+                        {% else %}
+                            <p>Unable to fetch the current temperature.</p>
+                        {% endif %}
+                    </div>
+                    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                        <form class="chat-form" action="/chat" method="POST">
+                            <input type="hidden" name="temp" value="{{ chicago_temp }}">
+                            <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Get Your Outfit Suggestion!</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Suggestion Card -->
+    <div id="suggestion-card" class="card mt-4" style="display: none;">
+        <div class="card-body">
+            <h5 class="card-title">Outfit Suggestion</h5>
+            <p class="card-text" id="suggestion-text"></p>
+        </div>
     </div>
 </div>
+
+<!-- Spinner Script -->
+<script>
+    document.querySelectorAll('.chat-form').forEach(form => {
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const button = this.querySelector('button');
+            button.disabled = true;
+            button.textContent = ''; // Hide button text
+            const spinner = document.createElement('span');
+            spinner.innerHTML = `
+                <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+                <span role="status">Loading...</span>
+            `;
+            button.appendChild(spinner);
+
+            const formData = new FormData(this);
+            fetch(this.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('suggestion-text').innerText = data.suggestion;
+                document.getElementById('suggestion-card').style.display = 'block';
+            })
+            .catch(error => console.error('Error:', error))
+            .finally(() => {
+                button.removeChild(spinner);
+                button.disabled = false;
+                button.textContent = 'Get Your Outfit Suggestion!'; // Restore button text
+            });
+        });
+    });
+</script>
 {% endblock %}
