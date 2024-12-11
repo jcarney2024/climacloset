@@ -1,11 +1,17 @@
+import os  # Added import
 from weakref import ref
 from flask import Blueprint, render_template, redirect, url_for, request, flash, get_flashed_messages, session, jsonify
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
 from .models import User
-from . import db
+from . import db, mail
+from flask_mail import Message
+from itsdangerous import URLSafeTimedSerializer, SignatureExpired, BadSignature
 
 auth = Blueprint('auth', __name__)
+
+# Configure the serializer
+serializer = URLSafeTimedSerializer(os.getenv('SECRET_KEY'))
 
 @auth.route('/login')
 def login():
@@ -90,3 +96,64 @@ def is_authenticated():
     auth_status = current_user.is_authenticated
     session.modified = False  # Prevent session from being extended
     return jsonify({'authenticated': auth_status})
+
+@auth.route('/forgot', methods=['GET', 'POST'])
+def forgot():
+    if request.method == 'GET':
+        if current_user.is_authenticated:
+            return redirect(url_for('main.profile'))
+        return render_template('forgot.html')
+    else:
+        email = request.form.get('email')
+        user = User.query.filter_by(email=email).first()
+        if user:
+            token = serializer.dumps(user.email, salt='password-reset-salt')
+            reference = os.urandom(8).hex()
+            msg = Message(
+                subject='Reset Your Password!',
+                sender='noreply@climacloset.com',
+                recipients=[email]
+            )
+            msg.html = render_template('reset_password_email.html', user=user, token=token, reference=reference)
+            try:
+                mail.send(msg)
+                flash('Password reset email sent.')
+            except Exception as e:
+                flash(f'Failed to send password reset email. {e}')
+        else:
+            flash('Email not found.', 'red')
+        return redirect(url_for('auth.login'))
+
+@auth.route('/reset_password/<token>')
+def reset_password(token):
+    try:
+        email = serializer.loads(token, salt='password-reset-salt', max_age=3600)
+    except (SignatureExpired, BadSignature):
+        flash('The password reset link is invalid or has expired.', 'red')
+        return redirect(url_for('auth.forgot'))
+    return render_template('reset_password.html', token=token)
+    
+@auth.route('/reset_password/<token>', methods=['POST'])
+def reset_password_post(token):
+    try:
+        email = serializer.loads(token, salt='password-reset-salt', max_age=3600)
+    except (SignatureExpired, BadSignature):
+        flash('The password reset link is invalid or has expired.', 'red')
+        return redirect(url_for('auth.forgot'))
+    
+    password = request.form.get('password')
+    confirmation = request.form.get('confirmation')
+    
+    if password != confirmation:
+        flash('Passwords do not match.', 'red')
+        return redirect(url_for('auth.reset_password', token=token))
+    
+    user = User.query.filter_by(email=email).first()
+    if user:
+        user.password = generate_password_hash(password, method='pbkdf2:sha256')
+        db.session.commit()
+        flash('Your password has been updated.', 'green')
+        return redirect(url_for('auth.login'))
+    else:
+        flash('User not found.', 'red')
+        return redirect(url_for('auth.forgot'))
