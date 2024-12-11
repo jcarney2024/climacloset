@@ -20,7 +20,7 @@
   <!-- Main Profile Section -->
   <div class="profile-main">
     <!-- Display Profile Picture -->
-    <img src="{{ current_user.image_file or url_for('static', filename='default-profile.jpg') }}"
+    <img src="{{ current_user.image_file or url_for('static', filename='default.png') }}"
       alt="{{ current_user.name }}'s Profile Picture" class="profile-img" id="profileImg">
 
     <!-- Profile Info -->
@@ -32,7 +32,8 @@
     <!-- Profile Picture Upload Form Section -->
     <div class="profile-upload-section">
       <!-- Hidden Profile Picture Upload Form -->
-      <form id="profilePictureForm" action="/upload_picture" method="POST" enctype="multipart/form-data"
+      <form id="profilePictureForm" action="{{ url_for('profile.upload_picture') }}" method="POST"
+        enctype="multipart/form-data"
         style="display: none; justify-content: center; align-items: center; flex-direction: column; margin-top: 20px;">
         <input id="profile_picture" name="profile_picture" type="file" accept="image/*" class="file-input"
           onchange="previewImage(event)" style="margin-bottom: 10px;">

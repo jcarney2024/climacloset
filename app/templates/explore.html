@@ -4,54 +4,56 @@
 {% set active_page = "explore" %}
 
 {% block css %}
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <style>
-
-#suggestion-card {
-    bottom: 20px; 
-    left: 50%;
-    transform: translateX(-50%);
-    max-width: 90%;
-    width: 400px;
-    z-index: 1000;
-    display: none; 
-    text-align: center; 
-}
-
-/* Add space between the image and the button */
-.col-lg-4 img {
-    margin-bottom: 20px; /* Adds space below the image */
-}
-
-.col-lg-4 .btn {
-    margin-top: 20px; /* Adds space above the button */
-}
-
-/* Responsive design for smaller screens */
-@media (max-width: 768px) {
-    .col-lg-4 {
-        margin-bottom: 20px; /* Ensures there's spacing between columns */
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+<style>
+    #suggestion-card {
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 90%;
+        width: 400px;
+        z-index: 1000;
+        display: none;
+        text-align: center;
     }
 
-    .d-sm-flex {
-        display: block !important;
+    /* Add space between the image and the button */
+    .col-lg-4 img {
+        margin-bottom: 20px;
+        /* Adds space below the image */
     }
 
-    .d-sm-flex .btn {
-        margin-top: 10px; /* Adjust space above the button on small screens */
+    .col-lg-4 .btn {
+        margin-top: 20px;
+        /* Adds space above the button */
     }
-}
 
-    </style>
+    /* Responsive design for smaller screens */
+    @media (max-width: 768px) {
+        .col-lg-4 {
+            margin-bottom: 20px;
+            /* Ensures there's spacing between columns */
+        }
+
+        .d-sm-flex {
+            display: block !important;
+        }
+
+        .d-sm-flex .btn {
+            margin-top: 10px;
+            /* Adjust space above the button on small screens */
+        }
+    }
+</style>
 {% endblock %}
 
 {% block body %}
 <div class="container my-5">
-  <header class="mb-4">
-    <h1>Explore</h1>
-    <hr class="divider" />
-  </header>
+    <header class="mb-4">
+        <h1>Explore</h1>
+        <hr class="divider" />
+    </header>
     <div class="content mb-5">
         <p>Curious? Check out these popular cities!</p>
 
@@ -59,66 +61,78 @@
             <div class="row justify-content-center">
                 <!-- New York -->
                 <div class="col-lg-4 text-center">
-                    <img class="bd-placeholder-img rounded-circle" width="140" height="140" 
-                         src="{{ url_for('static', filename='NewYork.jpg') }}" alt="New York">
+                    <img class="bd-placeholder-img rounded-circle" width="140" height="140"
+                        src="{{ url_for('static', filename='NewYork.jpg') }}" alt="New York">
                     <br><br>
                     <h2 class="fw-normal">New York</h2>
                     <p>Explore the energy of the Big Apple!</p>
                     <div class="mb-3">
                         {% if ny_temp %}
-                            <p>The current temperature in New York is {{ ny_temp }}°F.</p>
+                        <p>The current temperature in New York is {{ ny_temp }}°F.</p>
                         {% else %}
-                            <p>Unable to fetch the current temperature.</p>
+                        <p>Unable to fetch the current temperature.</p>
                         {% endif %}
                     </div>
                     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
                         <form class="chat-form" action="/chat" method="POST">
                             <input type="hidden" name="temp" value="{{ ny_temp }}">
-                            <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Get Your Outfit Suggestion!</button>
+                            <input type="hidden" name="latitude" value="40.7128">
+                            <input type="hidden" name="longitude" value="-74.0060">
+                            <input type="hidden" name="location" value="New York, New York">
+                            <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Get Your Outfit
+                                Suggestion!</button>
                         </form>
                     </div>
                 </div>
 
                 <!-- San Francisco -->
                 <div class="col-lg-4 text-center">
-                    <img class="bd-placeholder-img rounded-circle" width="140" height="140" 
-                         src="{{ url_for('static', filename='San_Francisco.jpeg') }}" alt="San Francisco">
+                    <img class="bd-placeholder-img rounded-circle" width="140" height="140"
+                        src="{{ url_for('static', filename='San_Francisco.jpeg') }}" alt="San Francisco">
                     <br><br>
                     <h2 class="fw-normal">San Francisco</h2>
                     <p>Discover the charm of the Bay Area!</p>
                     <div class="mb-3">
                         {% if sf_temp %}
-                            <p>The current temperature in San Francisco is {{ sf_temp }}°F.</p>
+                        <p>The current temperature in San Francisco is {{ sf_temp }}°F.</p>
                         {% else %}
-                            <p>Unable to fetch the current temperature.</p>
+                        <p>Unable to fetch the current temperature.</p>
                         {% endif %}
                     </div>
                     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
                         <form class="chat-form" action="/chat" method="POST">
                             <input type="hidden" name="temp" value="{{ sf_temp }}">
-                            <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Get Your Outfit Suggestion!</button>
+                            <input type="hidden" name="latitude" value="37.7749">
+                            <input type="hidden" name="longitude" value="-122.4194">
+                            <input type="hidden" name="location" value="San Francisco, California">
+                            <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Get Your Outfit
+                                Suggestion!</button>
                         </form>
                     </div>
                 </div>
 
                 <!-- Chicago -->
                 <div class="col-lg-4 text-center">
-                    <img class="bd-placeholder-img rounded-circle" width="140" height="140" 
-                         src="{{ url_for('static', filename='Chicago.jpg') }}" alt="Chicago">
+                    <img class="bd-placeholder-img rounded-circle" width="140" height="140"
+                        src="{{ url_for('static', filename='Chicago.jpg') }}" alt="Chicago">
                     <br><br>
                     <h2 class="fw-normal">Chicago</h2>
                     <p>The Windy City awaits!</p>
                     <div class="mb-3">
                         {% if chicago_temp %}
-                            <p>The current temperature in Chicago is {{ chicago_temp }}°F.</p>
+                        <p>The current temperature in Chicago is {{ chicago_temp }}°F.</p>
                         {% else %}
-                            <p>Unable to fetch the current temperature.</p>
+                        <p>Unable to fetch the current temperature.</p>
                         {% endif %}
                     </div>
                     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
                         <form class="chat-form" action="/chat" method="POST">
                             <input type="hidden" name="temp" value="{{ chicago_temp }}">
-                            <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Get Your Outfit Suggestion!</button>
+                            <input type="hidden" name="latitude" value="41.8781">
+                            <input type="hidden" name="longitude" value="-87.6298">
+                            <input type="hidden" name="location" value="Chicago, Illinois">
+                            <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Get Your Outfit
+                                Suggestion!</button>
                         </form>
                     </div>
                 </div>
@@ -135,54 +149,61 @@
     </div>
 </div>
 
+<!-- Hidden form for location data -->
+<form id="location-form" action="/" method="GET" style="display: none;">
+    <input type="hidden" id="latitude" name="latitude" value="{{ latitude }}">
+    <input type="hidden" id="longitude" name="longitude" value="{{ longitude }}">
+    <input type="hidden" id="location" name="location" value="{{ location }}">
+</form>
+
 <script>
-   window.onload = function() {
-    document.querySelectorAll('.chat-form').forEach(form => {
-        form.addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevent default form submission
-            const button = this.querySelector('button');
-            const suggestionCard = document.getElementById('suggestion-card');
-            const suggestionText = document.getElementById('suggestion-text');
-            
-            // Disable button and show spinner
-            button.disabled = true;
-            button.textContent = '';
-            const spinner = document.createElement('span');
-            spinner.innerHTML = `
+    window.onload = function () {
+        document.querySelectorAll('.chat-form').forEach(form => {
+            form.addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent default form submission
+                const button = this.querySelector('button');
+                const suggestionCard = document.getElementById('suggestion-card');
+                const suggestionText = document.getElementById('suggestion-text');
+
+                // Disable button and show spinner
+                button.disabled = true;
+                button.textContent = '';
+                const spinner = document.createElement('span');
+                spinner.innerHTML = `
                 <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
                 <span role="status">Loading...</span>
             `;
-            button.appendChild(spinner);
+                button.appendChild(spinner);
 
-            // Fetch data from the server
-            const formData = new FormData(this);
-            fetch(this.action, {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                // Update the suggestion card with the received data
-                suggestionText.innerText = data.suggestion;
-                suggestionCard.style.display = 'block'; // Show the suggestion box (it will stay fixed now)
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred while fetching your suggestion. Please try again.');
-            })
-            .finally(() => {
-                // Re-enable the button and remove the spinner
-                button.removeChild(spinner);
-                button.disabled = false;
-                button.textContent = 'Get Your Outfit Suggestion!';
+                // Fetch data from the server
+                const formData = new FormData(this);
+                fetch(this.action, {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // Update the suggestion card with the received data
+                        suggestionText.innerText = data.suggestion;
+                        suggestionCard.style.display = 'block'; // Show the suggestion box (it will stay fixed now)
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred while fetching your suggestion. Please try again.');
+                    })
+                    .finally(() => {
+                        // Re-enable the button and remove the spinner
+                        button.removeChild(spinner);
+                        button.disabled = false;
+                        button.textContent = 'Get Your Outfit Suggestion!';
+                    });
             });
         });
-    });
-};
+    };
 </script>
 {% endblock %}

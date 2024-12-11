@@ -242,6 +242,60 @@ ul.no-bullets {
   /* Add space between buttons */
 }
 
+/* Edit Name Form */
+.edit-name-form {
+  margin-top: 30px;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+.edit-name-form label {
+  font-size: 1.1em;
+  color: #fff;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.edit-name-form input {
+  width: 80%;
+  padding: 12px;
+  font-size: 1.1em;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.edit-name-form input:focus {
+  border-color: #84a1b9;
+}
+
+.edit-name-form button {
+  font-size: 1.2em;
+  padding: 10px 30px;
+  background-color: #545484;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-name-form button:hover {
+  background-color: #545484;
+}
+
+.edit-name-form button:active {
+  background-color: #545484;
+  transform: translateY(1px);
+}
+
+.edit-name-form button:focus {
+  outline: none;
+}
+
 .upload-btn {
   background-color: #84a1b9;
   color: white;
@@ -385,4 +439,25 @@ ul.no-bullets {
     margin-right: 0;
     margin-bottom: 20px;
   }
+}
+
+.alert {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.alert-warning {
+  color: #856404;
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+}
+
+.alert svg {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
 }
