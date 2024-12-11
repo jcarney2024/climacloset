@@ -59,7 +59,8 @@ def index():
 @main.route('/profile')
 @login_required
 def profile():
-    return render_template('profile.html', name=current_user.name)
+    user = current_user  # Get the current logged-in user
+    return render_template('profile.html', name=user.name, current_user=user)
 
 @main.route('/about')
 def about():

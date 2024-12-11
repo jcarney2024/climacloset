@@ -57,7 +57,7 @@ def create_app():
     
     # blueprint for profile routes
     from .edit import profile as profile_blueprint
-    app.register_blueprint(profile_blueprint)
+    app.register_blueprint(profile_blueprint, url_prefix='/profile')
 
     # Register error handler
     app.register_error_handler(404, page_not_found)
