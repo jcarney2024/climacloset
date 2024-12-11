@@ -16,57 +16,36 @@
   </svg>
 </h1>
 
-<div class="profile-wrapper">
-  <!-- Main Profile Section -->
-  <div class="profile-main">
-    <!-- Display Profile Picture -->
-    <img src="{{ current_user.image_file or url_for('static', filename='default-profile.jpg') }}"
-      alt="{{ current_user.name }}'s Profile Picture" class="profile-img" id="profileImg">
+<div class="profile-container">
+  <!-- Display Profile Picture -->
+  <img src="{{ current_user.image_file or url_for('static', filename='default.png') }}"
+    alt="{{ current_user.name }}'s Profile Picture" class="profile-img" id="profileImg">
 
-    <!-- Profile Info -->
-    <div class="profile-info">
-      <p><strong>Name:</strong> {{ name }}</p>
-      <p><strong>Email:</strong> {{ current_user.email }}</p>
-    </div>
-
-    <!-- Profile Picture Upload Form Section -->
-    <div class="profile-upload-section">
-      <!-- Hidden Profile Picture Upload Form -->
-      <form id="profilePictureForm" action="/upload_picture" method="POST" enctype="multipart/form-data"
-        style="display: none; justify-content: center; align-items: center; flex-direction: column; margin-top: 20px;">
-        <input id="profile_picture" name="profile_picture" type="file" accept="image/*" class="file-input"
-          onchange="previewImage(event)" style="margin-bottom: 10px;">
-        <button type="submit" class="upload-btn">Submit</button>
-      </form>
-
-      <!-- Edit Profile Picture Button -->
-      <button id="editProfilePicBtn" class="upload-btn" onclick="toggleProfilePictureForm()">Edit Profile
-        Picture</button>
-    </div>
-
-    <!-- Edit Name Button -->
-    <button id="editNameBtn" class="upload-btn" onclick="openModal()" style="margin-top: 20px;">Edit Name</button>
+  <!-- Profile Info -->
+  <div class="profile-info">
+    <p><strong>Name:</strong> {{ name }}</p>
+    <p><strong>Email:</strong> {{ current_user.email }}</p>
   </div>
 
+  <!-- Profile Picture Upload Form Section -->
+  <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <!-- Hidden Profile Picture Upload Form -->
+    <form id="profilePictureForm" action="{{ url_for('profile.upload_picture') }}" method="POST"
+      enctype="multipart/form-data"
+      style="display: none; justify-content: center; align-items: center; flex-direction: column; margin-top: 20px;">
+      <input id="profile_picture" name="profile_picture" type="file" accept="image/*" class="file-input"
+        onchange="previewImage(event)" style="margin-bottom: 10px;">
+      <button type="submit" class="upload-btn">Submit</button>
+    </form>
 
-  <!-- Closet History Section (Now outside the profile container but still side by side) -->
-  <div class="history-container">
-    <h2>Closet History</h2>
-    <div id="response-container" class="response-container">
-      {% for entry in history %}
-      <div class="history-entry">
-        <p><strong>Date:</strong> {{ entry.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</p>
-        <p><strong>Location:</strong> {{ entry.location }}</p>
-        <p><strong>Latitude:</strong> {{ entry.latitude }}</p>
-        <p><strong>Longitude:</strong> {{ entry.longitude }}</p>
-        <p><strong>Suggestion:</strong> {{ entry.response }}</p>
-      </div>
-      {% else %}
-      <p>No history available.</p>
-      {% endfor %}
-    </div>
+    <!-- Edit Profile Picture Button -->
+    <button id="editProfilePicBtn" class="upload-btn" onclick="toggleProfilePictureForm()">Edit Profile Picture</button>
   </div>
+
+  <!-- Edit Name Button -->
+  <button id="editNameBtn" class="upload-btn" onclick="openModal()" style="margin-top: 20px;">Edit Name</button>
 </div>
+
 <!-- Modal for Editing Name -->
 <div id="modal-container" class="modal-container" style="display:none;">
   <div class="modal-content">
@@ -79,6 +58,7 @@
     </form>
   </div>
 </div>
+
 {% endblock %}
 
 {% block js %}
