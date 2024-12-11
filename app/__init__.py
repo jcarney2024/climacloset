@@ -54,6 +54,10 @@ def create_app():
     # blueprint for non-auth parts of app
     from .main import main as main_blueprint, page_not_found
     app.register_blueprint(main_blueprint)
+    
+    # blueprint for profile routes
+    from .edit import profile as profile_blueprint
+    app.register_blueprint(profile_blueprint)
 
     # Register error handler
     app.register_error_handler(404, page_not_found)

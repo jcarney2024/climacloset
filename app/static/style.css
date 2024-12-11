@@ -1,3 +1,10 @@
+/* General Styling */
+body {
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
 .btn-primary {
   background-color: #84a1b9;
   /* Light Blue */
@@ -140,4 +147,273 @@ ul.no-bullets {
   /* Remove padding */
   margin: 0;
   /* Remove margins */
+}
+
+
+/* Profile Title */
+.title {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 2.5em;
+  color: #333;
+}
+
+.profile-container {
+  background: #1b224e;
+  border-radius: 15px;
+  padding: 30px;
+  width: 100%;
+  max-width: 350px;
+  margin: 50px auto;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.profile-info {
+  margin-top: 20px;
+  color: white;
+  /* White text inside the blue box */
+}
+
+.profile-info p {
+  font-size: 18px;
+  margin: 5px 0;
+  line-height: 1.5;
+}
+
+.profile-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid white;
+  /* Add a white border around the image */
+  margin-bottom: 20px;
+}
+
+/* Upload Button */
+.upload-btn {
+  margin-top: 15px;
+  background-color: #84a1b9;
+  /* A darker blue for the upload button */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.upload-btn:hover {
+  background-color: #5c7893;
+  /* New blue shade for hover */
+  transform: translateY(-2px);
+  /* Slight lift on hover */
+}
+
+.upload-btn:active {
+  background-color: #5c7893;
+  transform: translateY(1px);
+  /* Slight press effect */
+}
+
+/* File Upload Input */
+.upload-form input[type="file"] {
+  display: none;
+}
+
+.upload-form label {
+  background-color: #687ba4;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+.upload-form label:hover {
+  background-color: #5c7893;
+}
+
+/* Edit Name Form */
+.edit-name-form {
+  margin-top: 30px;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+.edit-name-form label {
+  font-size: 1.1em;
+  color: #fff;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.edit-name-form input {
+  width: 80%;
+  padding: 12px;
+  font-size: 1.1em;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.edit-name-form input:focus {
+  border-color: #84a1b9;
+}
+
+.edit-name-form button {
+  font-size: 1.2em;
+  padding: 10px 30px;
+  background-color: #545484;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-name-form button:hover {
+  background-color: #545484;
+}
+
+.edit-name-form button:active {
+  background-color: #545484;
+  transform: translateY(1px);
+}
+
+.edit-name-form button:focus {
+  outline: none;
+}
+
+.modal-container {
+  display: none;
+  /* Ensure it is hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Add a background overlay */
+}
+
+.modal-content {
+  position: relative;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  width: 378px;
+  max-height: 90%;
+  overflow-y: auto;
+}
+
+ /* Modal Container */
+ .modal-container {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-content h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+/* Close Button */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 30px;
+  color: #333;
+  cursor: pointer;
+}
+
+.edit-name-form label {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.edit-name-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.edit-name-form input:focus {
+  outline: none;
+  border-color: #0056b3;
+  box-shadow: 0 0 3px rgba(0, 0, 255, 0.3);
+}
+
+.edit-name-form button {
+  padding: 12px 20px;
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.edit-name-form button:hover {
+  background-color: #004080;
+}
+
+.alert {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.alert-warning {
+  color: #856404;
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+}
+
+.alert svg {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
 }

@@ -7,6 +7,8 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(255), unique=True)
     password = db.Column(db.String(255))
     name = db.Column(db.String(255))
+    image_file = db.Column(db.String(130), nullable=False, default='../static/default.png')
+
     
 @login_manager.user_loader
 def load_user(id):
