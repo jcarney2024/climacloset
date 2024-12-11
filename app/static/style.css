@@ -156,6 +156,103 @@ ul.no-bullets {
   margin-top: 50px;
   font-size: 2.5em;
   color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title svg {
+  margin-left: 10px;
+}
+
+.profile-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+  flex-wrap: wrap;
+  /* For responsive design */
+  gap: 20px;
+  width: 100%;
+  /* Ensure the wrapper takes full width */
+  max-width: 1200px;
+  /* This will limit the maximum width of the entire wrapper */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Main Profile Section */
+.profile-main,
+.history-container {
+  width: 48%;
+  /* Both sections will now share equal width */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  justify-content: flex-start;
+  max-width: 600px;
+  /* Max width of both sections */
+}
+
+.profile-main {
+  background: #1b224e;
+  color: white;
+  min-height: 500px;
+  /* Min height ensures buttons fit */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Closet History Section */
+.history-container {
+  width: 48%;
+  /* Ensure it shares equal width with the profile */
+  max-width: 600px;
+  /* Max width for responsiveness */
+  height: 500px;
+  /* Fix the height */
+  background-color: #f8f9fa;
+  color: #333;
+  font-size: 1.1em;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  /* Ensure the scrollbar appears if content overflows */
+}
+
+.history-entry {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.history-entry p {
+  margin: 5px 0;
+}
+
+.history-entry strong {
+  font-weight: bold;
+}
+
+.history-entry span {
+  font-style: italic;
+  color: #555;
+}
+
+/* Scrollbar Styling */
+.history-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+.history-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
 }
 
 .profile-container {
@@ -189,13 +286,27 @@ ul.no-bullets {
   border: 5px solid white;
   /* Add a white border around the image */
   margin-bottom: 20px;
+  transition: transform 0.3s ease;
+  margin-right: 20px;
 }
 
-/* Upload Button */
+.profile-info {
+  color: white;
+  font-size: 1.1em;
+}
+
+.profile-upload-section {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  /* Ensure buttons are properly spaced */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* Add space between buttons */
+}
+
 .upload-btn {
-  margin-top: 15px;
   background-color: #84a1b9;
-  /* A darker blue for the upload button */
   color: white;
   padding: 10px 20px;
   border: none;
@@ -221,6 +332,10 @@ ul.no-bullets {
 /* File Upload Input */
 .upload-form input[type="file"] {
   display: none;
+}
+
+.upload-btn:focus {
+  outline: none;
 }
 
 .upload-form label {
@@ -318,8 +433,8 @@ ul.no-bullets {
   overflow-y: auto;
 }
 
- /* Modal Container */
- .modal-container {
+/* Modal Container */
+.modal-container {
   display: none;
   position: fixed;
   top: 0;
@@ -359,42 +474,31 @@ ul.no-bullets {
   cursor: pointer;
 }
 
-.edit-name-form label {
-  font-size: 16px;
-  color: #333;
-  margin-bottom: 5px;
-  display: block;
-}
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .profile-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
 
-.edit-name-form input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 16px;
-  box-sizing: border-box;
-}
+  .profile-main,
+  .history-container {
+    width: 100%;
+    margin-bottom: 20px;
+    max-width: 100%;
+    /* Allow full width on small screens */
+  }
 
-.edit-name-form input:focus {
-  outline: none;
-  border-color: #0056b3;
-  box-shadow: 0 0 3px rgba(0, 0, 255, 0.3);
-}
+  .history-container {
+    max-width: none;
+    height: auto;
+    max-height: none;
+  }
 
-.edit-name-form button {
-  padding: 12px 20px;
-  background-color: #0056b3;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
-}
-
-.edit-name-form button:hover {
-  background-color: #004080;
+  .profile-img {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
 }
 
 .alert {
