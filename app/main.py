@@ -64,7 +64,8 @@ def index():
 @login_required
 def profile():
     user = current_user  # Get the current logged-in user
-    return render_template('profile.html', name=user.name, current_user=user)
+    history = History.query.filter_by(user_id=user.id).order_by(History.timestamp.desc()).all()
+    return render_template('profile.html', name=user.name, current_user=user, history=history)
 
 @main.route('/about')
 def about():

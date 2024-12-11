@@ -165,21 +165,27 @@ ul.no-bullets {
   margin-left: 10px;
 }
 
+
 .profile-wrapper {
   display: flex;
   justify-content: space-between;
   margin-top: 50px;
-  flex-wrap: wrap; /* For responsive design */
+  flex-wrap: wrap;
+  /* For responsive design */
   gap: 20px;
-  width: 100%;  /* Ensure the wrapper takes full width */
-  max-width: 1200px;  /* This will limit the maximum width of the entire wrapper */
+  width: 100%;
+  /* Ensure the wrapper takes full width */
+  max-width: 1200px;
+  /* This will limit the maximum width of the entire wrapper */
   margin-left: auto;
   margin-right: auto;
 }
 
 /* Main Profile Section */
-.profile-main, .history-container {
-  width: 48%;  /* Both sections will now share equal width */
+.profile-main,
+.history-container {
+  width: 48%;
+  /* Both sections will now share equal width */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -187,13 +193,15 @@ ul.no-bullets {
   border-radius: 15px;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
   justify-content: flex-start;
-  max-width: 600px;  /* Max width of both sections */
+  max-width: 600px;
+  /* Max width of both sections */
 }
 
 .profile-main {
   background: #1b224e;
   color: white;
-  min-height: 500px; /* Min height ensures buttons fit */
+  min-height: 500px;
+  /* Min height ensures buttons fit */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -226,10 +234,12 @@ ul.no-bullets {
 
 .profile-upload-section {
   margin-top: 20px;
-  margin-bottom: 20px; /* Ensure buttons are properly spaced */
+  margin-bottom: 20px;
+  /* Ensure buttons are properly spaced */
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Add space between buttons */
+  gap: 10px;
+  /* Add space between buttons */
 }
 
 .upload-btn {
@@ -259,16 +269,20 @@ ul.no-bullets {
 
 /* Closet History Section */
 .history-container {
-  width: 48%;  /* Ensure it shares equal width with the profile */
-  max-width: 600px;  /* Max width for responsiveness */
-  height: 500px; /* Fix the height */
+  width: 48%;
+  /* Ensure it shares equal width with the profile */
+  max-width: 600px;
+  /* Max width for responsiveness */
+  height: 500px;
+  /* Fix the height */
   background-color: #f8f9fa;
   color: #333;
   font-size: 1.1em;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow-y: auto; /* Ensure the scrollbar appears if content overflows */
+  overflow-y: auto;
+  /* Ensure the scrollbar appears if content overflows */
 }
 
 .history-entry {
@@ -353,10 +367,12 @@ ul.no-bullets {
     align-items: center;
   }
 
-  .profile-main, .history-container {
+  .profile-main,
+  .history-container {
     width: 100%;
     margin-bottom: 20px;
-    max-width: 100%;  /* Allow full width on small screens */
+    max-width: 100%;
+    /* Allow full width on small screens */
   }
 
   .history-container {
