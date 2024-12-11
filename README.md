@@ -1,11 +1,11 @@
 # ClimaCloset
 
-ClimaCloset is a web application designed to simplify managing your wardrobe with weather-specific outfit recommendations. By integrating weather forecasts, ClimaCloset helps you dress appropriately for any occasion.
+ClimaCloset is a web application that is designed to give you weather-specific outfit recommendations. By integrating weather forecasts, ClimaCloset allows you to dress appropriately for any occasion.
 
 ## Features
 - Dynamic weather-based clothing suggestions.
 - Easy-to-navigate user interface.
-- Secure user authentication and profile management.
+- Secure user authentication and specific profile management.
 
 ## Prerequisites
 - Python 3.9+ installed on your system.
@@ -24,12 +24,10 @@ ClimaCloset is a web application designed to simplify managing your wardrobe wit
    [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/jcarney2024/climacloset)
 
 2. **Initialization**:
-   - Wait for the development container to set up automatically using `.devcontainer/devcontainer.json`.
+   - Wait for the development container to set up using `.devcontainer/devcontainer.json`.
 
 3. **Run the Flask app**:
-   ```bash
-   flask run --debug --host=0.0.0.0
-   ```
+   type flask run --debug --host=0.0.0.0 into the terminal 
 
 4. **Access the app**:
    - Forward port **5000** when prompted.
@@ -62,9 +60,26 @@ ClimaCloset is a web application designed to simplify managing your wardrobe wit
 
 ## Usage
 1. Open the app in your browser.
-2. Sign up or log in.
-3. Add items to your wardrobe.
+
+## Without a Log in
+1. Use text box to input a location
+2. Read temperature of location
+3. Click outfit suggestion button
 4. View recommendations based on the current weather.
+5. Check out Explore Page from clicking "Explore" on the top header
+6. Check out About Page from clicking "About" on the top header
+
+## With a Log in
+3. Sign up or log in.
+4. Edit profile picture if you want to
+5. Edit name if you want to
+6.  Use text box to input a location
+7. Read temperature of location
+8. Click outfit suggestion button
+9. View recommendations based on the current weather.
+10. Check out Explore Page from clicking "Explore" on the top header
+11. Check out About Page from clicking "About" on the top header
+12. Log out when done
 
 ## Deployment
 This app is designed to deploy easily on Heroku. Use the `Procfile` for deployment configuration. Ensure all environment variables in `.env` are configured correctly.
