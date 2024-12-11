@@ -52,8 +52,16 @@ def index():
         weather_icon = "../static/windy.svg"
     else:
         weather_icon = "../static/sun_cloud.svg"  # sunny weather    
+    
+    user_name = current_user.name if current_user.is_authenticated else None
 
-    return render_template('index.html', temp=temp, selected_location=selected_location, image=weather_icon)
+    return render_template(
+    'index.html',
+    temp=temp,
+    selected_location=selected_location,
+    image=weather_icon,
+    user_name=user_name
+)
 
 
 @main.route('/profile')
