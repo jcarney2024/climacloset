@@ -171,25 +171,37 @@ ul.no-bullets {
   margin-top: 50px;
   flex-wrap: wrap; /* For responsive design */
   gap: 20px;
+  width: 100%;  /* Ensure the wrapper takes full width */
+  max-width: 1200px;  /* This will limit the maximum width of the entire wrapper */
+  margin-left: auto;
+  margin-right: auto;
 }
 
-
 /* Main Profile Section */
-.profile-main {
-  width: 60%;
+.profile-main, .history-container {
+  width: 48%;  /* Both sections will now share equal width */
+  height: 400px; /* Set a fixed height for both */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  background: #1b224e;
-  border-radius: 15px;
   padding: 30px;
-  width: 100%;
-  max-width: 400px;
-  margin: 50px auto;
+  border-radius: 15px;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-  display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
+  max-width: 600px;  /* Max width of both sections */
+}
+
+.profile-main {
+  background: #1b224e;
+  color: white;
+}
+
+.history-container {
+  background-color: #f8f9fa;
+  color: #333;
+  font-size: 1.1em;
+  overflow-y: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .profile-img {
@@ -239,22 +251,7 @@ ul.no-bullets {
   outline: none;
 }
 
-/* Closet History Section (Now outside of profile container but side by side) */
-.history-container {
-  width: 35%;
-  max-width: 400px;
-  min-width: 280px;
-  background-color: #f8f9fa;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  color: #333;
-  font-size: 1.1em;
-  margin-left: 20px;
-  overflow-y: auto;
-  max-height: 400px;
-}
-
+/* Closet History Section */
 .history-container h2 {
   font-size: 24px;
   margin-bottom: 15px;
@@ -337,7 +334,7 @@ ul.no-bullets {
 
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
-  .profile-container {
+  .profile-wrapper {
     flex-direction: column;
     align-items: center;
   }
@@ -345,6 +342,7 @@ ul.no-bullets {
   .profile-main, .history-container {
     width: 100%;
     margin-bottom: 20px;
+    max-width: 100%;  /* Allow full width on small screens */
   }
 
   .history-container {

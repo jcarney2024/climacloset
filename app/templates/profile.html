@@ -14,8 +14,8 @@
   </svg> 
 </h1>
 
-<div class="profile-wrapper"></div>
-  <!-- Main Profile Section -->
+<div class="profile-wrapper">
+    <!-- Main Profile Section -->
   <div class="profile-main">
     <!-- Display Profile Picture -->
     <img src="{{ current_user.image_file or url_for('static', filename='default-profile.jpg') }}" 
