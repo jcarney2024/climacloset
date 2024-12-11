@@ -1,10 +1,14 @@
-from flask import Blueprint, render_template, request, jsonify
+from flask import Blueprint, render_template, request, jsonify, redirect, url_for
 from flask_login import login_required, current_user
 import requests
 from dotenv import load_dotenv
 import google.generativeai as genai
 import os
 import json
+from datetime import datetime
+from flask_login import current_user
+from .models import History
+from . import db
 
 load_dotenv()
 
@@ -31,8 +35,8 @@ main = Blueprint('main', __name__)
 def index():
     latitude = request.args.get('latitude', '41.3081')
     longitude = request.args.get('longitude', '-72.9282')
-    selected_location = f"{latitude},{longitude}" if latitude and longitude else None
-
+    location = request.args.get('location', 'New Haven, Connecticut')
+    
     api_url = f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&current_weather=true&temperature_unit=fahrenheit"
 
 
@@ -53,7 +57,7 @@ def index():
     else:
         weather_icon = "../static/sun_cloud.svg"  # sunny weather    
 
-    return render_template('index.html', temp=temp, selected_location=selected_location, image=weather_icon)
+    return render_template('index.html', temp=temp, selected_location=f"{latitude},{longitude}", image=weather_icon, latitude=latitude, longitude=longitude, location=location)
 
 
 @main.route('/profile')
@@ -101,7 +105,13 @@ def explore():
 @main.route('/chat', methods=['POST'])
 def chat():
     temp = request.form.get('temp')
-    # Remove hardcoded API key
+    latitude = request.form.get('latitude')
+    longitude = request.form.get('longitude')
+    location = request.form.get('location')
+    
+    # Validate the received data
+    if not all([temp, latitude, longitude, location]):
+        return jsonify({'error': 'Missing required data.'}), 400
     
     generation_config = {
     "temperature": 1,
@@ -120,6 +130,18 @@ def chat():
     response = model.generate_content(f"Generate clothing suggestions based on the temperature: {temp} degrees farenheit. Only give one sentence response with what to wear in simple terms for an outfit.")
     suggestion = response.text if response.text else "No suggestion available."
 
+    if current_user.is_authenticated:
+        new_history = History(
+            user_id=current_user.id,
+            latitude=latitude,
+            longitude=longitude,
+            location=location,
+            timestamp=datetime.utcnow(),
+            response=suggestion
+        )
+        db.session.add(new_history)
+        db.session.commit()
+    
     return jsonify({'suggestion': suggestion})
 
 @main.route('/autocomplete')
