@@ -5,12 +5,27 @@
 {% block body %}
 <div class="px-4 py-5 my-5 text-center">
   <h1 class="display-5 fw-bold text-body-emphasis">Welcome to ClimaCloset</h1>
+
+  {% if not current_user.is_authenticated %}
+  <div class="alert alert-danger d-inline-block mx-auto text-center" role="alert">
+    You're not logged in, and suggestions aren't being saved.
+  </div>
+  {% else %}
+  <div class="alert alert-success d-flex mx-auto" role="alert" style="max-width: 500px;">
+    <div class="d-flex align-items-center">
+      <span>You're logged in. Your suggestions are being saved.</span>
+      <a href="/profile" class="btn btn-success ms-3">View Here</a>
+    </div>
+  </div>
+  {% endif %}
+
   <div class="col-md-4 mx-auto">
     <p class="lead mb-4">Select a location to check the weather:</p>
 
     <!-- Wrap the input and suggestions in a relative container -->
     <div style="position: relative;">
-      <input type="text" id="location-input" class="form-control" placeholder="Enter a location" autocomplete="off">
+      <input type="text" id="location-input" class="form-control" placeholder="Enter a location" value="{{ location }}"
+        autocomplete="off">
       <div id="suggestions" class="list-group mb-3"></div>
     </div>
 
@@ -24,6 +39,9 @@
       <hr>
       <form id="chat-form" action="/chat" method="POST">
         <input type="hidden" id="temp" name="temp" value="{{temp}}">
+        <input type="hidden" id="latitude" name="latitude" value="{{latitude}}">
+        <input type="hidden" id="longitude" name="longitude" value="{{longitude}}">
+        <input type="hidden" id="location" name="location" value="{{location}}">
         <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">
           Get Your Outfit Suggestion!
         </button>
@@ -38,6 +56,13 @@
     </div>
   </div>
 </div>
+
+<!-- Hidden form for location data -->
+<form id="location-form" action="/" method="GET" style="display: none;">
+  <input type="hidden" id="latitude" name="latitude" value="{{ latitude }}">
+  <input type="hidden" id="longitude" name="longitude" value="{{ longitude }}">
+  <input type="hidden" id="location" name="location" value="{{ location }}">
+</form>
 
 <style>
   #suggestions {
@@ -81,5 +106,7 @@
         button.textContent = 'Get Your Outfit Suggestion!'; // Restore button text
       });
   });
+
+  // Remove the inline script handling autocomplete and location selection
 </script>
 {% endblock %}
