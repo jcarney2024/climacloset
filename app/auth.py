@@ -11,7 +11,7 @@ from itsdangerous import URLSafeTimedSerializer, SignatureExpired, BadSignature
 auth = Blueprint('auth', __name__)
 
 # Configure the serializer
-serializer = URLSafeTimedSerializer(os.environ.get('SECRET_KEY'))
+serializer = URLSafeTimedSerializer(os.getenv('SECRET_KEY'))
 
 @auth.route('/login')
 def login():
