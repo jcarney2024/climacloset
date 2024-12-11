@@ -1,10 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // ...existing code...
+
     const locationInput = document.getElementById('location-input');
     const suggestionsBox = document.getElementById('suggestions');
-    const latitudeInput = document.getElementById('latitude');
-    const longitudeInput = document.getElementById('longitude');
-    const locationHiddenInput = document.getElementById('location');
-    const tempInput = document.getElementById('temp');
 
     let timeout = null;
 
@@ -13,28 +11,27 @@ document.addEventListener('DOMContentLoaded', function () {
         clearTimeout(timeout);
         suggestionsBox.innerHTML = '';  // Clear suggestions immediately
 
-        if (query.length >= 2) {
+        if (query.length >= 3) {
             timeout = setTimeout(() => {
                 fetch(`/autocomplete?q=${encodeURIComponent(query)}`)
                     .then(response => response.json())
                     .then(data => {
                         suggestionsBox.innerHTML = '';
-                        data.forEach(location => {
-                            const suggestionItem = document.createElement('div');
+                        data.forEach(item => {
+                            const suggestionItem = document.createElement('a');
+                            suggestionItem.href = '#';
                             suggestionItem.classList.add('list-group-item', 'list-group-item-action');
-                            suggestionItem.textContent = location.name;
-                            suggestionItem.dataset.latitude = location.latitude;
-                            suggestionItem.dataset.longitude = location.longitude;
-                            suggestionItem.dataset.locationName = location.name;
-                            suggestionItem.addEventListener('click', function () {
-                                locationInput.value = this.dataset.locationName;
-                                latitudeInput.value = this.dataset.latitude;
-                                longitudeInput.value = this.dataset.longitude;
-                                locationHiddenInput.value = this.dataset.locationName;
+                            suggestionItem.textContent = item.name;
+                            suggestionItem.dataset.latitude = item.latitude;
+                            suggestionItem.dataset.longitude = item.longitude;
+                            suggestionItem.addEventListener('click', function (e) {
+                                e.preventDefault();
+                                locationInput.value = this.textContent;
                                 suggestionsBox.innerHTML = '';
-
+                                const latitude = this.dataset.latitude;
+                                const longitude = this.dataset.longitude;
                                 // Update the weather information
-                                updateWeather(this.dataset.latitude, this.dataset.longitude, this.dataset.locationName);
+                                updateWeather(latitude, longitude);
                             });
                             suggestionsBox.appendChild(suggestionItem);
                         });
@@ -45,8 +42,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    function updateWeather(latitude, longitude, locationName) {
-        fetch(`/?latitude=${latitude}&longitude=${longitude}&location=${encodeURIComponent(locationName)}`)
+    function updateWeather(latitude, longitude) {
+        fetch(`/?latitude=${latitude}&longitude=${longitude}`)
             .then(response => response.text())
             .then(html => {
                 // Parse the returned HTML to update the weather info and image
@@ -54,18 +51,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 const doc = parser.parseFromString(html, 'text/html');
                 const newWeatherInfo = doc.querySelector('#weather-info').innerHTML;
                 const newWeatherImage = doc.querySelector('#weather-image').src;
-                const newTemp = doc.querySelector('#temp').value;
-
                 document.getElementById('weather-info').innerHTML = newWeatherInfo;
                 document.getElementById('weather-image').src = newWeatherImage;
-                tempInput.value = newTemp;
-
-                // Update hidden inputs
-                latitudeInput.value = latitude;
-                longitudeInput.value = longitude;
-                locationHiddenInput.value = locationName;
+                document.getElementById('temp').value = doc.querySelector('#temp').value;
             });
     }
+
+    // ...existing code...
 });
 
 function sendGetRequest() {

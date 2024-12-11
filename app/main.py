@@ -1,14 +1,10 @@
-from flask import Blueprint, render_template, request, jsonify, redirect, url_for
+from flask import Blueprint, render_template, request, jsonify
 from flask_login import login_required, current_user
 import requests
 from dotenv import load_dotenv
 import google.generativeai as genai
 import os
 import json
-from datetime import datetime
-from flask_login import current_user
-from .models import History
-from . import db
 
 load_dotenv()
 
@@ -35,8 +31,8 @@ main = Blueprint('main', __name__)
 def index():
     latitude = request.args.get('latitude', '41.3081')
     longitude = request.args.get('longitude', '-72.9282')
-    location = request.args.get('location', 'New Haven, Connecticut')
-    
+    selected_location = f"{latitude},{longitude}" if latitude and longitude else None
+
     api_url = f"https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&current_weather=true&temperature_unit=fahrenheit"
 
 
@@ -56,16 +52,23 @@ def index():
         weather_icon = "../static/windy.svg"
     else:
         weather_icon = "../static/sun_cloud.svg"  # sunny weather    
+    
+    user_name = current_user.name if current_user.is_authenticated else None
 
-    return render_template('index.html', temp=temp, selected_location=f"{latitude},{longitude}", image=weather_icon, latitude=latitude, longitude=longitude, location=location)
+    return render_template(
+    'index.html',
+    temp=temp,
+    selected_location=selected_location,
+    image=weather_icon,
+    user_name=user_name
+)
 
 
 @main.route('/profile')
 @login_required
 def profile():
     user = current_user  # Get the current logged-in user
-    history = History.query.filter_by(user_id=user.id).order_by(History.timestamp.desc()).all()
-    return render_template('profile.html', name=user.name, current_user=user, history=history)
+    return render_template('profile.html', name=user.name, current_user=user)
 
 @main.route('/about')
 def about():
@@ -106,13 +109,7 @@ def explore():
 @main.route('/chat', methods=['POST'])
 def chat():
     temp = request.form.get('temp')
-    latitude = request.form.get('latitude')
-    longitude = request.form.get('longitude')
-    location = request.form.get('location')
-    
-    # Validate the received data
-    if not all([temp, latitude, longitude, location]):
-        return jsonify({'error': 'Missing required data.'}), 400
+    # Remove hardcoded API key
     
     generation_config = {
     "temperature": 1,
@@ -131,18 +128,6 @@ def chat():
     response = model.generate_content(f"Generate clothing suggestions based on the temperature: {temp} degrees farenheit. Only give one sentence response with what to wear in simple terms for an outfit.")
     suggestion = response.text if response.text else "No suggestion available."
 
-    if current_user.is_authenticated:
-        new_history = History(
-            user_id=current_user.id,
-            latitude=latitude,
-            longitude=longitude,
-            location=location,
-            timestamp=datetime.utcnow(),
-            response=suggestion
-        )
-        db.session.add(new_history)
-        db.session.commit()
-    
     return jsonify({'suggestion': suggestion})
 
 @main.route('/autocomplete')
