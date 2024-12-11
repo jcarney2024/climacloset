@@ -72,7 +72,7 @@
   {% block js %} {% endblock %}
 
   {% if active_page != 'login' and active_page != 'signup' and active_page != 'index' and active_page != 'explore' and
-  active_page != 'about' %}
+  active_page != 'about' and active_page != 'forgot' %}
   <script>
     function checkAuthentication() {
       fetch("{{ url_for('auth.is_authenticated') }}")

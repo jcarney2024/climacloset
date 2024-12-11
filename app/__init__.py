@@ -6,12 +6,14 @@ from dotenv import load_dotenv
 from datetime import timedelta
 from flask_compress import Compress
 import os
+from flask_mail import Mail
 
 # init SQLAlchemy so we can use it later in our models
 db = SQLAlchemy()
 migrate = Migrate()
 compress = Compress()
 login_manager = LoginManager()
+mail = Mail()
 
 def create_app():
     load_dotenv()
@@ -29,9 +31,18 @@ def create_app():
         uri = uri.replace("postgres://", "postgresql://", 1)
     app.config['SQLALCHEMY_DATABASE_URI'] = uri
 
+    # Mail configuration should be set before initializing Mail
+    app.config['MAIL_SERVER'] = os.environ.get('MAIL_SERVER')
+    app.config['MAIL_PORT'] = 587
+    app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
+    app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
+    app.config['MAIL_USE_TLS'] = True
+    app.config['MAIL_USE_SSL'] = False
+
     db.init_app(app)
     migrate.init_app(app, db)
     compress.init_app(app)
+    mail.init_app(app)  # Initialize mail after setting config
     
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
