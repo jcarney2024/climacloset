@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 <style>
     #suggestion-card {
+        position: fluid;
         bottom: 20px;
         left: 50%;
         transform: translateX(-50%);
@@ -16,24 +17,24 @@
         z-index: 1000;
         display: none;
         text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border: 1px solid #ddd;
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
     }
 
-    /* Add space between the image and the button */
     .col-lg-4 img {
         margin-bottom: 20px;
-        /* Adds space below the image */
     }
 
     .col-lg-4 .btn {
         margin-top: 20px;
-        /* Adds space above the button */
     }
 
-    /* Responsive design for smaller screens */
     @media (max-width: 768px) {
         .col-lg-4 {
             margin-bottom: 20px;
-            /* Ensures there's spacing between columns */
         }
 
         .d-sm-flex {
@@ -42,7 +43,6 @@
 
         .d-sm-flex .btn {
             margin-top: 10px;
-            /* Adjust space above the button on small screens */
         }
     }
 </style>
@@ -79,8 +79,7 @@
                             <input type="hidden" name="latitude" value="40.7128">
                             <input type="hidden" name="longitude" value="-74.0060">
                             <input type="hidden" name="location" value="New York, New York">
-                            <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Get Your Outfit
-                                Suggestion!</button>
+                            <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Get Your Outfit Suggestion!</button>
                         </form>
                     </div>
                 </div>
@@ -105,8 +104,7 @@
                             <input type="hidden" name="latitude" value="37.7749">
                             <input type="hidden" name="longitude" value="-122.4194">
                             <input type="hidden" name="location" value="San Francisco, California">
-                            <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Get Your Outfit
-                                Suggestion!</button>
+                            <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Get Your Outfit Suggestion!</button>
                         </form>
                     </div>
                 </div>
@@ -131,8 +129,7 @@
                             <input type="hidden" name="latitude" value="41.8781">
                             <input type="hidden" name="longitude" value="-87.6298">
                             <input type="hidden" name="location" value="Chicago, Illinois">
-                            <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Get Your Outfit
-                                Suggestion!</button>
+                            <button type="submit" class="btn btn-primary btn-lg px-4 gap-3">Get Your Outfit Suggestion!</button>
                         </form>
                     </div>
                 </div>
@@ -148,13 +145,6 @@
         </div>
     </div>
 </div>
-
-<!-- Hidden form for location data -->
-<form id="location-form" action="/" method="GET" style="display: none;">
-    <input type="hidden" id="latitude" name="latitude" value="{{ latitude }}">
-    <input type="hidden" id="longitude" name="longitude" value="{{ longitude }}">
-    <input type="hidden" id="location" name="location" value="{{ location }}">
-</form>
 
 <script>
     window.onload = function () {
@@ -190,7 +180,7 @@
                     .then(data => {
                         // Update the suggestion card with the received data
                         suggestionText.innerText = data.suggestion;
-                        suggestionCard.style.display = 'block'; // Show the suggestion box (it will stay fixed now)
+                        suggestionCard.style.display = 'block'; // Show the suggestion box
                     })
                     .catch(error => {
                         console.error('Error:', error);
