@@ -8,6 +8,7 @@ from flask_compress import Compress
 import os
 from flask_mail import Mail
 
+
 # init SQLAlchemy so we can use it later in our models
 db = SQLAlchemy()
 migrate = Migrate()
