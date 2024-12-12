@@ -224,36 +224,44 @@ ul.no-bullets {
   /* Ensure the scrollbar appears if content overflows */
 }
 
+
 .history-entry {
   background-color: #fff;
+  position: relative;
   padding: 15px;
   border-radius: 8px;
   margin-bottom: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
+
 .history-entry p {
   margin: 5px 0;
 }
 
+
 .history-entry strong {
   font-weight: bold;
 }
+
 
 .history-entry span {
   font-style: italic;
   color: #555;
 }
 
+
 /* Scrollbar Styling */
 .history-container::-webkit-scrollbar {
   width: 10px;
 }
 
+
 .history-container::-webkit-scrollbar-thumb {
   background: #888;
   border-radius: 10px;
 }
+
 
 .profile-container {
   background: #1b224e;
@@ -266,17 +274,20 @@ ul.no-bullets {
   text-align: center;
 }
 
+
 .profile-info {
   margin-top: 20px;
   color: white;
   /* White text inside the blue box */
 }
 
+
 .profile-info p {
   font-size: 18px;
   margin: 5px 0;
   line-height: 1.5;
 }
+
 
 .profile-img {
   width: 150px;
@@ -290,10 +301,12 @@ ul.no-bullets {
   margin-right: 20px;
 }
 
+
 .profile-info {
   color: white;
   font-size: 1.1em;
 }
+
 
 .profile-upload-section {
   margin-top: 20px;
@@ -304,6 +317,7 @@ ul.no-bullets {
   gap: 10px;
   /* Add space between buttons */
 }
+
 
 .upload-btn {
   background-color: #84a1b9;
@@ -316,6 +330,7 @@ ul.no-bullets {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
+
 .upload-btn:hover {
   background-color: #5c7893;
   /* New blue shade for hover */
@@ -323,20 +338,24 @@ ul.no-bullets {
   /* Slight lift on hover */
 }
 
+
 .upload-btn:active {
   background-color: #5c7893;
   transform: translateY(1px);
   /* Slight press effect */
 }
 
+
 /* File Upload Input */
 .upload-form input[type="file"] {
   display: none;
 }
 
+
 .upload-btn:focus {
   outline: none;
 }
+
 
 .upload-form label {
   background-color: #687ba4;
@@ -350,9 +369,11 @@ ul.no-bullets {
   transition: background-color 0.3s ease;
 }
 
+
 .upload-form label:hover {
   background-color: #5c7893;
 }
+
 
 /* Edit Name Form */
 .edit-name-form {
@@ -362,12 +383,14 @@ ul.no-bullets {
   text-align: center;
 }
 
+
 .edit-name-form label {
   font-size: 1.1em;
   color: #fff;
   margin-bottom: 10px;
   display: block;
 }
+
 
 .edit-name-form input {
   width: 80%;
@@ -380,9 +403,11 @@ ul.no-bullets {
   transition: border-color 0.3s;
 }
 
+
 .edit-name-form input:focus {
   border-color: #84a1b9;
 }
+
 
 .edit-name-form button {
   font-size: 1.2em;
@@ -395,18 +420,22 @@ ul.no-bullets {
   transition: background-color 0.3s ease;
 }
 
+
 .edit-name-form button:hover {
   background-color: #545484;
 }
+
 
 .edit-name-form button:active {
   background-color: #545484;
   transform: translateY(1px);
 }
 
+
 .edit-name-form button:focus {
   outline: none;
 }
+
 
 .modal-container {
   display: none;
@@ -422,6 +451,7 @@ ul.no-bullets {
   /* Add a background overlay */
 }
 
+
 .modal-content {
   position: relative;
   background-color: #fff;
@@ -432,6 +462,7 @@ ul.no-bullets {
   max-height: 90%;
   overflow-y: auto;
 }
+
 
 /* Modal Container */
 .modal-container {
@@ -447,6 +478,7 @@ ul.no-bullets {
   transition: all 0.3s ease;
 }
 
+
 .modal-content {
   background-color: #fff;
   padding: 30px;
@@ -458,11 +490,13 @@ ul.no-bullets {
   align-items: center;
 }
 
+
 .modal-content h2 {
   margin-bottom: 20px;
   font-size: 24px;
   color: #333;
 }
+
 
 /* Close Button */
 .close {
@@ -474,12 +508,14 @@ ul.no-bullets {
   cursor: pointer;
 }
 
+
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   .profile-wrapper {
     flex-direction: column;
     align-items: center;
   }
+
 
   .profile-main,
   .history-container {
@@ -489,17 +525,20 @@ ul.no-bullets {
     /* Allow full width on small screens */
   }
 
+
   .history-container {
     max-width: none;
     height: auto;
     max-height: none;
   }
 
+
   .profile-img {
     margin-right: 0;
     margin-bottom: 20px;
   }
 }
+
 
 .alert {
   display: flex;
@@ -510,14 +549,44 @@ ul.no-bullets {
   border-radius: 4px;
 }
 
+
 .alert-warning {
   color: #856404;
   background-color: #fff3cd;
   border-color: #ffeeba;
 }
 
+
 .alert svg {
   width: 20px;
   height: 20px;
   margin-right: 10px;
+}
+
+
+
+
+
+
+.delete-entry {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgb(0, 0, 0);
+  color: white;
+  border: none;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+}
+
+
+.delete-entry:hover {
+  background-color: rgb(19, 23, 100);
 }

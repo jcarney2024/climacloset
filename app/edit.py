@@ -1,6 +1,6 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, jsonify, render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user
-from .models import User
+from .models import User, History
 from . import db
 
 profile = Blueprint('profile', __name__)
@@ -31,3 +31,15 @@ def upload_picture():
     else:
         flash("No image selected!", "error")
         return redirect(url_for('main.profile'))
+
+@profile.route('/delete_entry/<int:entry_id>', methods=['POST'])
+@login_required
+def delete_entry(entry_id):
+    entry = History.query.get(entry_id)
+    if entry:
+        db.session.delete(entry)
+        db.session.commit()
+        flash("Entry deleted successfully!", "success")
+        return redirect(url_for('main.profile'))
+    flash("Failed to delete entry!", "error")
+    return redirect(url_for('main.profile'))

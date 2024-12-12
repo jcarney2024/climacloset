@@ -55,19 +55,25 @@
     <h2>Closet History</h2>
     <div id="response-container" class="response-container">
       {% for entry in history %}
-      <div class="history-entry">
-        <p><strong>Date:</strong> {{ entry.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</p>
-        <p><strong>Location:</strong> {{ entry.location }}</p>
-        <p><strong>Latitude:</strong> {{ entry.latitude }}</p>
-        <p><strong>Longitude:</strong> {{ entry.longitude }}</p>
-        <p><strong>Suggestion:</strong> {{ entry.response }}</p>
-      </div>
-      {% else %}
-      <p>No history available.</p>
-      {% endfor %}
+  <div class="history-entry" id="entry-{{ entry.id }}">
+    <button class="delete-entry" onclick="deleteEntry({{ entry.id }})">X</button>
+  <p><strong>Date:</strong> {{ entry.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+  <p><strong>Location:</strong> {{ entry.location }}</p>
+  <p><strong>Latitude:</strong> {{ entry.latitude }}</p>
+  <p><strong>Longitude:</strong> {{ entry.longitude }}</p>
+  <p><strong>Suggestion:</strong> {{ entry.response }}</p>
+</div>
+{% else %}
+<p>No history available.</p>
+{% endfor %}
     </div>
   </div>
 </div>
+
+<form id="deleteForm" method="POST" style="display: none;">
+  <input type="hidden" name="entry_id" id="entryIdInput">
+</form>
+
 <!-- Modal for Editing Name -->
 <div id="modal-container" class="modal-container" style="display:none;">
   <div class="modal-content">
@@ -104,6 +110,14 @@
       output.src = reader.result;
     };
     reader.readAsDataURL(event.target.files[0]);
+  }
+
+  function deleteEntry(entryId) {
+    const form = document.getElementById('deleteForm');
+    const input = document.getElementById('entryIdInput');
+    input.value = entryId;
+    form.action = `/profile/delete_entry/${entryId}`;
+    form.submit();
   }
 </script>
 {% endblock %}
