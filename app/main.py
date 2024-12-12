@@ -80,9 +80,12 @@ def explore():
     locations = {
         "Chicago": {"latitude": "41.8781", "longitude": "-87.6298"},
         "San Francisco": {"latitude": "37.7749", "longitude": "-122.4194"},
-        "New York": {"latitude": "40.7128", "longitude": "-74.0060"}
+        "New York": {"latitude": "40.7128", "longitude": "-74.0060"},
+        "Washington, D.C.": {"latitude": "38.9072", "longitude": "-77.0369"},
+        "Paris": {"latitude": "48.8566", "longitude": "2.3522"},
+        "Beijing": {"latitude": "39.9042", "longitude": "116.4074"}
     }
-    
+
     # Fetch weather data
     weather_data = {}
     for city, coords in locations.items():
@@ -91,18 +94,20 @@ def explore():
             response = requests.get(api_url)
             response.raise_for_status()  # Raise an HTTPError for bad responses
             data = response.json()
-            
             # Extract the current temperature from the response
             weather_data[city] = data.get("current_weather", {}).get("temperature")
-        except requests.RequestException as e:
+        except requests.RequestException:
             weather_data[city] = None  # Handle failure gracefully
-    
+
     # Pass temperatures to the template
     return render_template(
         'explore.html',
         chicago_temp=weather_data.get("Chicago"),
         sf_temp=weather_data.get("San Francisco"),
-        ny_temp=weather_data.get("New York")
+        ny_temp=weather_data.get("New York"),
+        dc_temp=weather_data.get("Washington, D.C."),
+        paris_temp=weather_data.get("Paris"),
+        beijing_temp=weather_data.get("Beijing")
     )
 
 @main.route('/chat', methods=['POST'])
