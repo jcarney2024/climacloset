@@ -33,11 +33,10 @@
         border: 1px solid #ccc;
         border-radius: 5px;
         background-color: #f9f9f9;
-        display: none;
+        display: none; /* Hidden by default */
         height: 100px; /* Fixed height for uniformity */
         overflow: hidden;
         text-overflow: ellipsis;
-        display: flex;
         align-items: center;
         justify-content: center;
         text-align: center;
@@ -121,7 +120,8 @@
                     })
                     .catch(error => {
                         console.error('Error:', error);
-                        alert('An error occurred while fetching your suggestion. Please try again.');
+                        suggestionBox.innerHTML = 'Unable to fetch suggestion. Please try again later.';
+                        suggestionBox.style.display = 'flex';
                     })
                     .finally(() => {
                         // Re-enable the button and restore original text
